@@ -14,8 +14,13 @@ def login():
     data = request.json
     username = data['username']
     password = data['password']
-    result = sign_in(username, password)
-    return Response(status=200) if result else Response(status=400)
+    user = sign_in(username, password)
+    if user is None:
+        return Response(status=400)
+    else:
+        # zaloguj
+        # return user and status 200
+        pass
 
 
 @app.route('/register', methods=['POST'])
@@ -23,5 +28,9 @@ def register():
     data = request.json
     username = data['username']
     password = data['password']
-    result = sign_up(username, password)
-    return Response(status=200) if result else Response(status=400)
+    user = sign_up(username, password)
+    if user is None:
+        return Response(status=400)
+    else:
+        # return user and status 200
+        pass
