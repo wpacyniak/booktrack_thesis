@@ -7,9 +7,13 @@ class User(db.Model):
     id: int
     username: str
     password: str
+    email: str
 
     def __repr__(self) -> str:
         return super().__repr__()
     
-    def get_string(self):
-        return {'username': self.username, 'id': self.id}
+    def to_json(self):
+        return {'username': self.username, 'id': self.id, 'email': self.email}
+    
+    def to_bson(self):
+        pass

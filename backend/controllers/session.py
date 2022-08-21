@@ -1,6 +1,7 @@
 from backend import db
 from backend.db_models.User import User
 from werkzeug.security import generate_password_hash, check_password_hash
+from backend import db
 
 
 class current_user:
@@ -13,21 +14,24 @@ class current_user:
 
 user_session = current_user()
 
-
+# check saving to a user
 def sign_in(login, password):
-    # db - get the user with the proper login
-    # if user found ( is not None) check password - check_password_hash(found_user.password, password)
-    # True: current_user.set_current_user_id , return True
-    # Else: return False
-    pass
+    db_user = db["users"].find_one({"username": login})
+    if db_user is not None and check_password_hash(db_user.password, password):
+        user_session.set_current_user_id(db_user._id)
+        return User(**db_user).to_json()
+    else:
+        return None
 
 
-def sign_up(login, password):
-    # check if that login already exists
-    # if already exists is None and login/password is not ""
-    # True: new_user in database- password -> generate_password_hash(password) return true
-    # else: return false
-    pass
+def sign_up(login, password, email):
+    db_login = db["users"].find_one({"username": login})
+    if db_login is None and login != "" and password != "" and email != "":
+        new_user = User(login, password, email)
+        db["users"].insert_one(new_user.to_bson())
+        return new_user.to_json()
+    else:
+        return None
 
 
 def sign_out():
