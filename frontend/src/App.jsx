@@ -1,29 +1,17 @@
 import React from "react";
-import { render } from "react-dom";
-import { Link, Router } from '@reach/router'
-// TODO:: Maube choose react-router ??? And what about the store?
-import ThemeContext from "./ThemeContext";
+import { Route, Routes } from "react-router";
+import { Welcome } from "./pages/Welcome";
 
 const App = () => {
-
   return (
-    <React.StrictMode>
-      <ThemeContext.Provider>
-        <div>
-          <header>
-            <Link to="/">
-              Adopt me!
-            </Link>
-          </header>
-          <Router>
-            <Home path="/"/>
-            <Login path="/login"/>
-            <Register path="/register"/>
-          </Router>
-        </div>
-      </ThemeContext.Provider>
-    </React.StrictMode>
+    <div>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* <Route path="/register" element={<Register />} /> */}
+      </Routes>
+    </div>
   );
 };
 
-render(<App />, document.getElementById("root"));
+export default App;
