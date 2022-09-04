@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import { Welcome } from "./pages/Welcome";
+import { Welcome } from "./pages/welcome/Welcome";
 
 const App = () => {
   return (
