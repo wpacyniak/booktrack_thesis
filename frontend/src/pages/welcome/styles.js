@@ -36,14 +36,12 @@ const ImageLamp = styled.img`
   position: absolute;
   bottom: 10vh;
   right: 8vw;
-  height: 200px;
 `;
 
 const ImageBooks = styled.img`
   position: absolute;
   bottom: 10vh;
   left: 8vw;
-  height: 200px;
 `;
 
 const Footer = styled.div`
