@@ -5,13 +5,16 @@ import {
   Subtitle,
   ButtonWrapper,
   Button,
-  ImageLamp,
-  ImageBooks,
-  Footer,
 } from "./styles";
 import { Footer } from "../../components/footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 export const Welcome = () => {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -19,7 +22,7 @@ export const Welcome = () => {
         <Subtitle>Witaj w swoim własnym książkowym kąciku!</Subtitle>
       </TextWrapper>
       <ButtonWrapper>
-        <Button>Zaloguj</Button>
+        <Button onClick={handleLogin}>Zaloguj</Button>
         <Button>Zarejestruj</Button>
       </ButtonWrapper>
       <Footer />
