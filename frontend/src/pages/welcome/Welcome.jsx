@@ -9,28 +9,20 @@ import {
   ImageBooks,
   Footer,
 } from "./styles";
+import { Footer } from "../../components/footer/Footer";
 
 export const Welcome = () => {
   return (
     <Wrapper>
       <TextWrapper>
         <Title>BOOKTRACK</Title>
-        <Subtitle>jakis tekst tu wstaw książki</Subtitle>
+        <Subtitle>Witaj w swoim własnym książkowym kąciku!</Subtitle>
       </TextWrapper>
       <ButtonWrapper>
         <Button>Zaloguj</Button>
         <Button>Zarejestruj</Button>
       </ButtonWrapper>
-      <Footer>
-        <ImageLamp
-          src={require("../../resources/images/lamp.png")}
-          alt="lamp"
-        />
-        <ImageBooks
-          src={require("../../resources/images/books_plant.png")}
-          alt="books and plant"
-        />
-      </Footer>
+      <Footer />
     </Wrapper>
   );
 };
