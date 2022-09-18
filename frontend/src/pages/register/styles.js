@@ -1,40 +1,44 @@
 import styled from "styled-components";
 import { colors } from "../../resources/constants";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  color: ${colors.violet_dark};
+  text-align: center;
+`;
 
 const Title = styled.h1`
+  margin-top: 10vh;
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 100px;
 `;
 
-const Subtitle = styled.h3`
+const Text = styled.h2``;
+
+const Input = styled.input`
+  width: 280px;
+  height: 70px;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 5px 10px ${colors.violet_light};
   font-family: "DM Sans";
   font-style: normal;
-  text-transform: uppercase;
-  font-weight: 100;
-  font-size: 40px;
+  padding: 0 10px;
+  font-size: 20px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
-const Login = styled.input``;
-
-const Password = styled.input``;
 const FormWrapper = styled.div`
-  margin-top: 19vh;
+  margin-top: 3vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${colors.violet_dark};
-  text-align: center;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 150px;
-  margin-top: 7vh;
+  align-items: center;
+  gap: 50px;
 `;
 
 const Button = styled.button`
@@ -56,4 +60,4 @@ const Button = styled.button`
   }
 `;
 
-export { Wrapper, FormWrapper, Login, Password, ButtonWrapper, Button };
+export { Wrapper, FormWrapper, Input, Button, Text, Title };

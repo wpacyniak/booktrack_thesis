@@ -16,23 +16,7 @@ const Title = styled.h1`
 
 const Text = styled.h2``;
 
-const Login = styled.input`
-  width: 280px;
-  height: 70px;
-  border: none;
-  border-radius: 25px;
-  box-shadow: 5px 10px ${colors.violet_light};
-  font-family: "DM Sans";
-  font-style: normal;
-  padding: 0 10px;
-  font-size: 20px;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
-const Password = styled.input`
+const Input = styled.input`
   width: 280px;
   height: 70px;
   border: none;
@@ -76,13 +60,4 @@ const Button = styled.button`
   }
 `;
 
-export {
-  Wrapper,
-  FormWrapper,
-  Login,
-  Password,
-  ButtonWrapper,
-  Button,
-  Text,
-  Title,
-};
+export { Wrapper, FormWrapper, Input, Button, Text, Title };
