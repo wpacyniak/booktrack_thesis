@@ -15,6 +15,10 @@ export const Welcome = () => {
     navigate("/login");
   };
 
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -23,7 +27,7 @@ export const Welcome = () => {
       </TextWrapper>
       <ButtonWrapper>
         <Button onClick={handleLogin}>Zaloguj</Button>
-        <Button>Zarejestruj</Button>
+        <Button onClick={handleRegister}>Zarejestruj</Button>
       </ButtonWrapper>
       <Footer />
     </Wrapper>

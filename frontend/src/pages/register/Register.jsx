@@ -3,21 +3,22 @@ import {
   FormWrapper,
   Login,
   Password,
-  ButtonWrapper,
   Button,
+  Text,
+  Title,
 } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 
 export const Register = () => {
   return (
     <Wrapper>
+      <Title>BOOKTRACK</Title>
+      <Text>Wpisz swój login i hasło, aby móc się zalogować:</Text>
       <FormWrapper>
-        <Login />
-        <Password />
-      </FormWrapper>
-      <ButtonWrapper>
+        <Login placeholder="Login" />
+        <Password placeholder="Hasło" type="password" />
         <Button>Zaloguj</Button>
-      </ButtonWrapper>
+      </FormWrapper>
       <Footer />
     </Wrapper>
   );
