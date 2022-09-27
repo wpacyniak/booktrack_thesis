@@ -1,5 +1,6 @@
-import { Wrapper, Header, Logo } from "./styles";
+import { Wrapper, Header, Logo, ButtonsWrapper } from "./styles";
 import { Footer } from "../../components/footer/Footer";
+import { Button } from "../../components/button/Button";
 
 const user = {
   username: "brownieBarbie",
@@ -20,6 +21,12 @@ export const Home = () => {
     <Wrapper>
       <Header>
         <Logo src={require("../../resources/images/logo.png")} alt="logo" />
+        <ButtonsWrapper>
+          <Button onClick={() => console.log("click")}>Profil</Button>
+          <Button onClick={() => console.log("click")}>Lista</Button>
+          <Button onClick={() => console.log("click")}>WishList</Button>
+          <Button onClick={() => console.log("click")}>Plany</Button>
+        </ButtonsWrapper>
       </Header>
       <Footer />
     </Wrapper>
