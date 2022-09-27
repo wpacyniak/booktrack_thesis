@@ -1,4 +1,4 @@
-import { Wrapper } from "./styles";
+import { Wrapper, Header, Logo } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 
 const user = {
@@ -18,6 +18,9 @@ const currentlyReading = {
 export const Home = () => {
   return (
     <Wrapper>
+      <Header>
+        <Logo src={require("../../resources/images/logo.png")} alt="logo" />
+      </Header>
       <Footer />
     </Wrapper>
   );
