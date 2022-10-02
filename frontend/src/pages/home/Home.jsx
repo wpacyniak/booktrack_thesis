@@ -8,6 +8,14 @@ import {
   Author,
   WrapperBar,
   Goal,
+  GoalSubText,
+  TextWrapper,
+  GoalWrapper,
+  ProgressBar,
+  Progress,
+  ProgressText,
+  BookWrapper,
+  InfoWrapper,
   Text,
   Cover,
 } from "./styles";
@@ -45,34 +53,53 @@ export const Home = () => {
         </ButtonsWrapper>
       </Header>
       <Welcome>Cześć, {user.username}!</Welcome>
-      <Goal>Cel {new Date().getFullYear()}</Goal>
-      <Goal>
-        {user.yearlyProgress}/{user.yearlyGoal}
-      </Goal>
-      <WrapperBar>
-        <CircularProgressbar
-          value={
-            user.yearlyProgress > user.yearlyGoal
-              ? 100
-              : (user.yearlyProgress * 100) / user.yearlyGoal
-          }
-          text={`${Math.round(
-            (user.yearlyProgress * 100) / user.yearlyGoal,
-            2
-          )}%`}
-          styles={buildStyles({
-            pathColor: colors.pink_dark,
-            textColor: colors.violet_dark,
-          })}
-        />
-      </WrapperBar>
+      <GoalWrapper>
+        <TextWrapper>
+          <Goal>Twój cel na {new Date().getFullYear()} rok:</Goal>
+          <GoalSubText>
+            {user.yearlyProgress}/{user.yearlyGoal} książek
+          </GoalSubText>
+        </TextWrapper>
+        <WrapperBar>
+          <CircularProgressbar
+            value={
+              user.yearlyProgress > user.yearlyGoal
+                ? 100
+                : (user.yearlyProgress * 100) / user.yearlyGoal
+            }
+            text={`${Math.round(
+              (user.yearlyProgress * 100) / user.yearlyGoal,
+              2
+            )}%`}
+            styles={buildStyles({
+              pathColor: colors.pink_dark,
+              textColor: colors.violet_dark,
+            })}
+          />
+        </WrapperBar>
+      </GoalWrapper>
       <Text>Obecnie czytam:</Text>
-      <Cover src={currentlyReading.cover} alt="cover" />
-      <Title>{currentlyReading.name}</Title>
-      <Author>{currentlyReading.author}</Author>
-      {/* progress bar with how many pages */}
-      {/* Button do dodania stron */}
-      {/* Button do oznaczenia jako przeczytane */}
+      <BookWrapper>
+        <Cover src={currentlyReading.cover} alt="cover" />
+        <InfoWrapper>
+          <Title>{currentlyReading.name}</Title>
+          <Author>{currentlyReading.author}</Author>
+          <ProgressBar>
+            <Progress>
+              <ProgressText>
+                {Math.round(
+                  (currentlyReading.progress * 100) / currentlyReading.pages,
+                  2
+                )}
+                %
+              </ProgressText>
+            </Progress>
+          </ProgressBar>
+        </InfoWrapper>
+        {/* progress bar with how many pages */}
+        {/* Button do dodania stron */}
+        {/* Button do oznaczenia jako przeczytane */}
+      </BookWrapper>
       <Footer />
     </Wrapper>
   );

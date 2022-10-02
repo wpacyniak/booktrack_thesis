@@ -5,4 +5,5 @@ export const colors = {
   violet_hover: "#423686",
   violet_light: "#93a4d8",
   white: "#ffff",
+  gray: "#d6d6d6",
 };
