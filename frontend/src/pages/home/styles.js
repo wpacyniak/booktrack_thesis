@@ -26,4 +26,33 @@ const Logo = styled.img`
   width: 4vw;
 `;
 
-export { Wrapper, Header, Logo, ButtonsWrapper };
+const Welcome = styled.h1``;
+
+const WrapperBar = styled.div`
+  width: 9vw;
+  height: 9vh;
+`;
+
+const Goal = styled.h2``;
+
+const Text = styled.h2``;
+
+const Cover = styled.img``;
+
+const Title = styled.h4``;
+
+const Author = styled.h4``;
+
+export {
+  Wrapper,
+  Header,
+  Logo,
+  ButtonsWrapper,
+  Title,
+  Welcome,
+  WrapperBar,
+  Goal,
+  Text,
+  Author,
+  Cover,
+};
