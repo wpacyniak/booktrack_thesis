@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
 import {
   Wrapper,
-  Header,
-  Logo,
-  ButtonsWrapper,
   Welcome,
   Title,
   Author,
@@ -25,7 +22,7 @@ import {
   Cover,
 } from "./styles";
 import { Footer } from "../../components/footer/Footer";
-import { Button } from "../../components/button/Button";
+import { Header } from "../../components/header/Header";
 import { ModalPages } from "../../components/modalPages/ModalPages";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "../../resources/react-circular-progress-bar-styles.css";
@@ -60,15 +57,7 @@ export const Home = () => {
   console.log(isOpen);
   return (
     <Wrapper>
-      <Header>
-        <Logo src={require("../../resources/images/logo.png")} alt="logo" />
-        <ButtonsWrapper>
-          <Button onClick={() => console.log("click")}>Profil</Button>
-          <Button onClick={() => console.log("click")}>Lista</Button>
-          <Button onClick={() => console.log("click")}>WishList</Button>
-          <Button onClick={() => console.log("click")}>Plany</Button>
-        </ButtonsWrapper>
-      </Header>
+      <Header />
       <Welcome>Cześć, {user.username}!</Welcome>
       <GoalWrapper>
         <TextWrapper>
