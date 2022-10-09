@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import {
   Wrapper,
   Header,
@@ -10,20 +11,26 @@ import {
   Goal,
   GoalSubText,
   TextWrapper,
+  ButtonWrapper,
   GoalWrapper,
   ProgressBar,
   Progress,
   ProgressText,
   BookWrapper,
   InfoWrapper,
+  ProgressWrapper,
+  BookButton,
+  Pages,
   Text,
   Cover,
 } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { Button } from "../../components/button/Button";
+import { ModalPages } from "../../components/modalPages/ModalPages";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "../../resources/react-circular-progress-bar-styles.css";
 import { colors } from "../../resources/constants";
+import { useEffect } from "react";
 
 const user = {
   username: "brownieBarbie",
@@ -41,6 +48,16 @@ const currentlyReading = {
 };
 
 export const Home = () => {
+  const [bookProgress, setBookProgress] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setBookProgress(
+      Math.round((currentlyReading.progress * 100) / currentlyReading.pages, 2)
+    );
+  }, []);
+
+  console.log(isOpen);
   return (
     <Wrapper>
       <Header>
@@ -84,21 +101,28 @@ export const Home = () => {
         <InfoWrapper>
           <Title>{currentlyReading.name}</Title>
           <Author>{currentlyReading.author}</Author>
-          <ProgressBar>
-            <Progress>
-              <ProgressText>
-                {Math.round(
-                  (currentlyReading.progress * 100) / currentlyReading.pages,
-                  2
-                )}
-                %
-              </ProgressText>
-            </Progress>
-          </ProgressBar>
+          <Pages>
+            {currentlyReading.progress} / {currentlyReading.pages} stron
+          </Pages>
+          <ProgressWrapper>
+            <ProgressBar>
+              <Progress width={bookProgress}>
+                <ProgressText>{bookProgress}%</ProgressText>
+              </Progress>
+            </ProgressBar>
+            <BookButton onClick={() => setIsOpen(!isOpen)}>
+              Dodaj strony
+            </BookButton>
+            <ModalPages
+              isOpen={isOpen}
+              pages={currentlyReading.progress}
+              setIsOpen={setIsOpen}
+            />
+          </ProgressWrapper>
+          <ButtonWrapper>
+            <BookButton>Przeczytana</BookButton>
+          </ButtonWrapper>
         </InfoWrapper>
-        {/* progress bar with how many pages */}
-        {/* Button do dodania stron */}
-        {/* Button do oznaczenia jako przeczytane */}
       </BookWrapper>
       <Footer />
     </Wrapper>
