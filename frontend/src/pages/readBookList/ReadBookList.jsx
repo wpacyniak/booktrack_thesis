@@ -7,7 +7,7 @@ export const ReadBookList = () => {
   return (
     <Wrapper>
       <Header />
-      {/* <Book /> */}
+      <Book />
       <Footer />
     </Wrapper>
   );
