@@ -7,7 +7,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  margin-top: 10vh;
+  margin-top: 7vh;
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 700;
@@ -33,12 +33,12 @@ const Input = styled.input`
 `;
 
 const FormWrapper = styled.div`
-  margin-top: 3vh;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
 `;
 
 const Button = styled.button`

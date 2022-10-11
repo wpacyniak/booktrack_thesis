@@ -3,7 +3,7 @@ import { colors } from "../../resources/constants";
 
 const Wrapper = styled.div`
   margin: 0 auto;
-  width: 1100px;
+  width: 800px;
   height: 100vh;
   background-color: ${colors.white};
   color: ${colors.violet_dark};
@@ -17,11 +17,11 @@ const GoalWrapper = styled.div`
 `;
 
 const TextWrapper = styled.div`
-  margin-top: 60px;
+  margin-top: 20px;
   text-align: center;
 `;
 
-const Welcome = styled.h1`
+const Welcome = styled.h2`
   text-align: center;
   font-weight: 400;
   font-family: "DM Sans";
@@ -31,49 +31,50 @@ const Welcome = styled.h1`
 const Goal = styled.h2`
   font-family: "DM Sans";
   font-style: normal;
-  font-size: 26px;
+  font-size: 20px;
   text-transform: uppercase;
 `;
 
 const GoalSubText = styled.h3`
-  margin-top: 20px;
+  margin-top: 18px;
   font-family: "DM Sans";
   font-style: normal;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
 `;
 
 const WrapperBar = styled.div`
-  width: 200px;
+  width: 120px;
 `;
 
 const Text = styled.h2`
   text-align: center;
   font-family: "DM Sans";
   font-style: normal;
-  font-size: 26px;
+  font-size: 20px;
   text-transform: uppercase;
 `;
 
 const Cover = styled.img`
-  width: 250px;
-  margin-left: 40px;
+  width: 200px;
+  height: auto;
+  margin-left: 20px;
 `;
 
 const BookWrapper = styled.div`
   display: flex;
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 const InfoWrapper = styled.div`
   margin-left: 60px;
-  margin-top: 40px;
+  margin-top: 20px;
 `;
 
 const Title = styled.h4`
   font-family: "DM Sans";
   font-style: normal;
-  font-size: 26px;
+  font-size: 22px;
 `;
 
 const Author = styled.h3`
@@ -86,11 +87,11 @@ const ProgressBar = styled.div`
   height: 30px;
   background-color: ${colors.gray};
   border-radius: 15px;
-  width: 500px;
+  width: 300px;
 `;
 const Progress = styled.div`
   height: 30px;
-  width: ${(props) => `${props.width * 5}px`};
+  width: ${(props) => `${props.width * 3}px`};
   background-color: ${colors.pink_dark};
   border-radius: 15px 0px 0px 15px;
 `;
