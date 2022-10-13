@@ -13,6 +13,10 @@ export const Header = () => {
     navigate("/readBooks");
   }
 
+  function handlePlan() {
+    navigate("/planBooks");
+  }
+
   return (
     <Wrapper>
       <Logo src={require("../../resources/images/logo.png")} alt="logo" />
@@ -21,7 +25,7 @@ export const Header = () => {
         <Button onClick={() => console.log("click")}>Profil</Button>
         <Button onClick={handleList}>Lista</Button>
         <Button onClick={() => console.log("click")}>WishList</Button>
-        <Button onClick={() => console.log("click")}>Plany</Button>
+        <Button onClick={handlePlan}>Plany</Button>
       </ButtonsWrapper>
     </Wrapper>
   );
