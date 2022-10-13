@@ -2,6 +2,7 @@ import { Wrapper, ListWrapper, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { Book } from "../../components/book/Book";
+import { AddButton } from "../../components/addButton/AddButton";
 
 const books = [
   {
@@ -67,6 +68,7 @@ export const ReadBookList = () => {
           books.map((book, index) => {
             return <Book key={index} book={book} type={type} />;
           })}
+        <AddButton />
       </ListWrapper>
       <Footer />
     </Wrapper>

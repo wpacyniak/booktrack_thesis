@@ -1,6 +1,7 @@
 import { Wrapper, ListWrapper, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
+import { AddButton } from "../../components/addButton/AddButton";
 import { Book } from "../../components/book/Book";
 
 const books = [
@@ -57,6 +58,7 @@ export const PlanBookList = () => {
           books.map((book, index) => {
             return <Book key={index} book={book} type={type} />;
           })}
+        <AddButton />
       </ListWrapper>
       <Footer />
     </Wrapper>
