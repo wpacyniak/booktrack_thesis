@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-// If the title too long mooooove to show full on focus
 const Title = styled.p`
   font-family: "DM Sans";
   font-style: normal;
@@ -21,6 +20,9 @@ const Title = styled.p`
   text-transform: uppercase;
   max-width: 200px;
   color: ${colors.violet_dark};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Author = styled.p`
