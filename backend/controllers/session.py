@@ -14,10 +14,12 @@ class current_user:
 
 user_session = current_user()
 
+
 def sign_in(login, password):
     db_user = db["users"].find_one({"username": login})
     if db_user is not None and check_password_hash(db_user["password"], password):
-        user = User(str(db_user["_id"]), db_user["username"], db_user["password"], db_user["email"])
+        user = User(str(db_user["_id"]), db_user["username"],
+                    db_user["password"], db_user["e-mail"])
         user_session.set_current_user_id(user.id)
         return user.to_json()
     else:

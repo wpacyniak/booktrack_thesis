@@ -1,15 +1,64 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = async () => {
+    if (!username || !password) {
+      // ostrzezenie o wypelnieniu pól
+      return;
+    }
+
+    const body = {
+      username,
+      password,
+    };
+
+    const res = await fetch("http://localhost:5000/login", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) {
+      const user = await res.json();
+      // set userID
+      console.log(user);
+      navigate("/home");
+      return;
+    }
+
+    if (res.status === 404) {
+      console.log("Niepoprawne dane logowania.");
+      return;
+    }
+
+    console.log("Nie udało się zalogować.");
+  };
+
   return (
     <Wrapper>
       <Title>BOOKTRACK</Title>
       <Text>Wpisz swój login i hasło, aby móc się zalogować:</Text>
       <FormWrapper>
-        <Input placeholder="Login" />
-        <Input placeholder="Hasło" type="password" />
-        <Button>Zaloguj</Button>
+        <Input
+          placeholder="Login"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          placeholder="Hasło"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button onClick={handleClick}>Zaloguj</Button>
       </FormWrapper>
       <Footer />
     </Wrapper>
