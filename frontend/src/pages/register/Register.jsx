@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

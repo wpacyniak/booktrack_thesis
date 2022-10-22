@@ -7,10 +7,19 @@ import {
   Button,
   ButtonsWrapper,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 export const Book = ({ book, type }) => {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    // przesylanie ID a tam fetchowanie danych po ID
+    if (type === "read") {
+      navigate("/book");
+    }
+  }
   return (
-    <Wrapper>
+    <Wrapper onClick={handleClick}>
       <Cover src={book.cover} alt="cover" />
       <Title>{book.name}</Title>
       <Author>

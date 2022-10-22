@@ -44,7 +44,9 @@ export const Header = () => {
           <Button onClick={handleList}>Lista</Button>
           <OptionsWrapper isExpanded={isExpanded}>
             {years?.map((year) => (
-              <Option onClick={handleClickYear}>{year}</Option>
+              <Option key={year} onClick={handleClickYear}>
+                {year}
+              </Option>
             ))}
           </OptionsWrapper>
         </ListWrapper>
