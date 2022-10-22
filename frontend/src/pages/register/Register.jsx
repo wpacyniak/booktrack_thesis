@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
