@@ -15,8 +15,8 @@ export const Wrapper = styled.button`
   font-size: 80px;
 
   &:hover {
-    background-color: ${colors.pink_light};
-    color: ${colors.violet_hover};
+    background-color: ${colors.violet_dark};
+    color: ${colors.white};
     cursor: pointer;
   }
 `;
