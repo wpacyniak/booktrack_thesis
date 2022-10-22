@@ -26,7 +26,8 @@ def register():
     data = request.json
     username = data['username']
     password = data['password']
-    response = sign_up(username, password)
+    email = data['email']
+    response = sign_up(username, password, email)
     if response:
         return response, 200
     else:
