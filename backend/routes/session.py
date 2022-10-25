@@ -1,5 +1,6 @@
 from backend import app
-from flask import request, Response
+from flask import request, Response, jsonify
+from flask_jwt_extended import create_access_token
 
 from backend.controllers.session import sign_in, sign_up
 
@@ -18,7 +19,8 @@ def login():
     if user is None:
         return Response(status=400)
     else:
-        return user, 200
+        token = create_access_token(user)
+        return jsonify({'user': user, 'token': token}), 200
 
 
 @app.route('/register', methods=['POST'])
@@ -31,4 +33,5 @@ def register():
     if user is None:
         return Response(status=400)
     else:
-        return user, 200
+        token = create_access_token(user)
+        return jsonify({'user': user, 'token': token}), 200

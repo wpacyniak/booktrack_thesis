@@ -31,9 +31,9 @@ def sign_up(login, password, email):
     if db_login is None and login != "" and password != "" and email != "":
         new_user = User(None, login, generate_password_hash(password), email)
         db["users"].insert_one(new_user.to_bson())
-        return True
+        return new_user.to_json()
     else:
-        return False
+        return None
 
 
 def sign_out():

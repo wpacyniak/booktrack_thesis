@@ -55,7 +55,7 @@ export const Home = () => {
     );
   }, []);
 
-  console.log(isOpen);
+  console.log(state.user);
   return (
     <Wrapper>
       <Header />
