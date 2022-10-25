@@ -37,11 +37,7 @@ export const Register = () => {
     });
 
     if (res.status === 200) {
-      const { user, token } = await res.json();
-      console.log(user, token);
-      dispatch({ type: "SET_USER", payload: user });
-      dispatch({ type: "SET_AUTH_TOKEN", payload: token });
-      navigate("/home");
+      navigate("/login");
       return;
     }
 
