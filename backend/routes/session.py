@@ -27,8 +27,8 @@ def register():
     username = data['username']
     password = data['password']
     email = data['email']
-    response = sign_up(username, password, email)
-    if response:
-        return response, 200
+    user = sign_up(username, password, email)
+    if user is None:
+        return Response(status=400)
     else:
-        return Response(status=400) 
+        return user, 200

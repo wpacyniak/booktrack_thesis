@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useStore } from "../../Store";
 import {
   Wrapper,
   Welcome,
@@ -30,7 +31,6 @@ import { colors } from "../../resources/constants";
 import { useEffect } from "react";
 
 const user = {
-  username: "brownieBarbie",
   yearlyGoal: 12,
   yearlyProgress: 10,
 };
@@ -47,6 +47,7 @@ const currentlyReading = {
 export const Home = () => {
   const [bookProgress, setBookProgress] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const { state } = useStore();
 
   useEffect(() => {
     setBookProgress(
@@ -58,7 +59,7 @@ export const Home = () => {
   return (
     <Wrapper>
       <Header />
-      <Welcome>Cześć, {user.username}!</Welcome>
+      <Welcome>Cześć, {state.user.username}!</Welcome>
       <GoalWrapper>
         <TextWrapper>
           <Goal>Twój cel na {new Date().getFullYear()} rok:</Goal>
