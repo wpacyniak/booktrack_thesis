@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
+import { useStore } from "../../Store";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { dispatch } = useStore();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,8 +36,7 @@ export const Login = () => {
 
     if (res.status === 200) {
       const user = await res.json();
-      // set userID
-      console.log(user);
+      dispatch({ type: "SET_USER", payload: user });
       navigate("/home");
       return;
     }
