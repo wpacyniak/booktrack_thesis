@@ -40,7 +40,7 @@ const Cover = styled.img`
 const TextRead = styled.p`
   margin-top: 10px;
   font-family: "DM Sans";
-  font-size: 
+  font-size: 16px;
   font-style: italic;
 `;
 

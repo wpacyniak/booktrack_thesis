@@ -8,6 +8,7 @@ import {
   ButtonsWrapper,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { FaRegStar } from "react-icons/fa";
 
 export const Book = ({ book, type }) => {
   const navigate = useNavigate();
@@ -27,7 +28,10 @@ export const Book = ({ book, type }) => {
       </Author>
       {type === "read" && (
         <TextRead>
-          {book.readDate} | {book.rate} {/* here star icon */}
+          <span>
+            {" "}
+            {book.readDate} | {book.rate} <FaRegStar style={{ color: "#2e2562", fontSize: "16px" }} />
+          </span>
         </TextRead>
       )}
       {type === "plan" && (
