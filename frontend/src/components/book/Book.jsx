@@ -15,7 +15,7 @@ export const Book = ({ book, type }) => {
   function handleClick() {
     // przesylanie ID a tam fetchowanie danych po ID
     if (type === "read") {
-      navigate("/book");
+      navigate("/book", { state: book });
     }
   }
   return (
