@@ -1,7 +1,6 @@
 from backend import db
 from backend.db_models.User import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from backend import db
 
 
 class current_user:

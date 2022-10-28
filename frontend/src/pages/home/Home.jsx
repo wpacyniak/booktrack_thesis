@@ -55,7 +55,6 @@ export const Home = () => {
     );
   }, []);
 
-  console.log(state.user);
   return (
     <Wrapper>
       <Header />

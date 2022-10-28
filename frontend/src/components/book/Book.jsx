@@ -27,7 +27,7 @@ export const Book = ({ book, type }) => {
       </Author>
       {type === "read" && (
         <TextRead>
-          {book.date} | {book.rate} {/* here star icon */}
+          {book.readDate} | {book.rate} {/* here star icon */}
         </TextRead>
       )}
       {type === "plan" && (

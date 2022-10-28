@@ -9,10 +9,13 @@ import {
 } from "./styles";
 import { Button } from "../button/Button";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../../Store";
 
-const years = [2019, 2020, 2021, 2022];
+// GET YEARS
+const years = [2020, 2021, 2022];
 
 export const Header = () => {
+  const { dispatch } = useStore();
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
 
@@ -25,8 +28,8 @@ export const Header = () => {
     // navigate("/readBooks");
   }
 
-  function handleClickYear() {
-    // setYear w contexcie
+  function handleClickYear(year) {
+    dispatch({ type: "SET_YEAR", payload: year });
     navigate("/readBooks");
   }
 
@@ -44,7 +47,7 @@ export const Header = () => {
           <Button onClick={handleList}>Lista</Button>
           <OptionsWrapper isExpanded={isExpanded}>
             {years?.map((year) => (
-              <Option key={year} onClick={handleClickYear}>
+              <Option key={year} onClick={() => handleClickYear(year)}>
                 {year}
               </Option>
             ))}
