@@ -4,12 +4,14 @@ import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { Book } from "../../components/book/Book";
 import { AddButton } from "../../components/addButton/AddButton";
+import { Form } from "../../components/form/Form";
 import { useStore } from "../../Store";
 
 export const ReadBookList = () => {
   const { state } = useStore();
 
   const [books, setBooks] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     getBooks();
@@ -28,13 +30,14 @@ export const ReadBookList = () => {
       body: JSON.stringify(body),
     });
 
-    console.log(res);
-
     if (res.status == 200) {
       const booksDb = await res.json();
-      console.log(booksDb);
       setBooks(booksDb);
     }
+  };
+
+  const onClick = () => {
+    setIsOpen(!isOpen);
   };
 
   const type = "read";
@@ -47,7 +50,8 @@ export const ReadBookList = () => {
           books.map((book, index) => {
             return <Book key={index} book={book} type={type} />;
           })}
-        <AddButton />
+        <AddButton onClick={onClick} />
+        <Form isOpen={isOpen} setIsOpen={setIsOpen} type="read" />
       </ListWrapper>
       <Footer />
     </Wrapper>

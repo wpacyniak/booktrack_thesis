@@ -30,7 +30,8 @@ export const Book = ({ book, type }) => {
         <TextRead>
           <span>
             {" "}
-            {book.readDate} | {book.rate} <FaRegStar style={{ color: "#2e2562", fontSize: "16px" }} />
+            {book.readDate} | {book.rate}{" "}
+            <FaRegStar style={{ color: "#2e2562", fontSize: "16px" }} />
           </span>
         </TextRead>
       )}
