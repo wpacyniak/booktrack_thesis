@@ -20,12 +20,12 @@ class Book():
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
                 'rate': self.rate, 'readDate': datetime.strftime(self.read_date, "%d %b %Y"), 'cover': self.cover}
 
-    def to_bson_update(self):
+    def to_bson_update(self, user_id):
         return {'id': ObjectId(self.id), 'author': self.author, 'title': self.title,
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
-                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover}
+                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': True, 'user_id': ObjectId(user_id)}
 
-    def to_bson(self):
+    def to_bson(self, user_id):
         return {'author': self.author, 'title': self.title, 'is_read': True,
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
-                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover}
+                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': True, 'user_id': ObjectId(user_id)}

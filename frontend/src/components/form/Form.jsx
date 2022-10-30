@@ -5,19 +5,23 @@ import {
   Title,
   Wrapper,
   Cover,
+  ButtonWrapper,
   Button,
   Label,
   TextArea,
+  DatePicker,
+  ErrorText,
   FormWrapper,
 } from "./styles";
 import { Input } from "../input/Input";
 import { StarPicker } from "../starPicker/StarPicker";
 import { useState } from "react";
+import { useStore } from "../../Store";
 
 const modalStyles = {
   content: {
     width: "800px",
-    height: "600px",
+    height: "500px",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -31,10 +35,10 @@ const modalStyles = {
   },
 };
 
-const types = ["plan", "read", "planToRead"];
-
-export const Form = ({ isOpen, setIsOpen, type }) => {
+export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
+  const { state } = useStore();
   Modal.setAppElement("#root");
+  const [errorText, setErrorText] = useState("");
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [pages, setPages] = useState(0);
@@ -42,13 +46,14 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
   const [note, setNote] = useState("");
   const [quote, setQuote] = useState("");
   const [rate, setRate] = useState(0);
+  const [date, setDate] = useState("");
 
   function closeModal() {
     setIsOpen(!isOpen);
+    setErrorText("");
   }
 
   function onChangeTitle(value) {
-    console.log("title");
     setTitle(value);
   }
   function onChangeAuthor(value) {
@@ -59,7 +64,6 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
   }
   function onChangeCover(value) {
     setCover(value);
-    console.log(value);
   }
   function onChangeNote(value) {
     setNote(value);
@@ -67,9 +71,63 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
   function onChangeQuote(value) {
     setQuote(value);
   }
-  function onChangeRate(value) {
-    setRate(value);
+
+  async function addRecord() {
+    var body = {};
+    if (type == "read") {
+      if (
+        !author ||
+        !title ||
+        !pages ||
+        !cover ||
+        !note ||
+        !quote ||
+        !rate ||
+        !date
+      ) {
+        setErrorText("Wszystkie pola muszą być wypełnione!");
+      }
+      const id = bookId ? bookId : 0;
+      body = {
+        id,
+        author,
+        title,
+        pages,
+        cover,
+        note,
+        quote,
+        rate,
+        date,
+        type: "read",
+      };
+    } else if (type == "plan") {
+      if (!author || !title || !pages || !cover) {
+        setErrorText("Wszystkie pola muszą być wypełnione!");
+      }
+      body = {
+        author,
+        title,
+        pages,
+        cover,
+        type: "plan",
+      };
+    }
+    const res = await fetch("http://localhost:5000/add_book", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) {
+      closeModal();
+      return;
+    }
+    setErrorText("Coś poszło nie tak!");
   }
+
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} style={modalStyles}>
       <CloseButton onClick={closeModal}>X</CloseButton>
@@ -113,12 +171,13 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
             <Label>Notatka</Label>
             <TextArea
               onChange={(e) => onChangeNote(e.target.value)}
-              rows="5"
+              rows="6"
               placeholder="Notatka"
             />
             <Label>Ocena</Label>
             <StarPicker value={rate} setValue={setRate} />
-            {/* datepicker + rate*/}
+            <Label>Data przeczytania</Label>
+            <DatePicker type="date" onChange={(e) => setDate(e.target.value)} />
           </FormWrapper>
         ) : null}
         <Cover
@@ -130,7 +189,10 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
           alt="cover"
         />
       </Wrapper>
-      <Button>Zapisz</Button>
+      <ButtonWrapper>
+        <Button onClick={addRecord}>Zapisz</Button>
+        <ErrorText>{errorText}</ErrorText>
+      </ButtonWrapper>
     </Modal>
   );
 };

@@ -2,7 +2,6 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Wrapper } from "./styles";
 
 export const StarPicker = ({ value, setValue }) => {
-  console.log(value);
   return (
     <Wrapper>
       {value >= 1 ? (

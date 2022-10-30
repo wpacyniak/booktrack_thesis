@@ -30,6 +30,7 @@ export const Header = () => {
 
   function handleClickYear(year) {
     dispatch({ type: "SET_YEAR", payload: year });
+    setIsExpanded(!isExpanded);
     navigate("/readBooks");
   }
 

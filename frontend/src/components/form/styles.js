@@ -30,6 +30,12 @@ const Title = styled.p`
   color: ${colors.violet_dark};
 `;
 
+const ErrorText = styled.p`
+  color: ${colors.violet_dark};
+  font-weight: 900;
+  text-transform: uppercase;
+`;
+
 const Button = styled.button`
   background-color: ${colors.violet_dark};
   font-family: "DM Sans";
@@ -50,6 +56,7 @@ const Button = styled.button`
 `;
 
 const Wrapper = styled.div`
+  margin-top: 10px;
   display: flex;
   justify-content: space-around;
 `;
@@ -92,12 +99,50 @@ const TextArea = styled.textarea`
   }
 `;
 
+const DatePicker = styled.input`
+  margin-top: 10px;
+  font-weight: 900;
+  border: none;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 16px;
+  ::-webkit-datetime-edit-month-field {
+    color: ${colors.violet_dark};
+  }
+  ::-webkit-datetime-edit-day-field {
+    color: ${colors.violet_dark};
+  }
+  ::-webkit-datetime-edit-year-field {
+    color: ${colors.violet_dark};
+  }
+  ::-webkit-calendar-picker-indicator {
+    color: ${colors.violet_dark};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  gap: 10px;
+`;
+
 export {
   CloseButton,
   Title,
   Wrapper,
   Cover,
+  ErrorText,
   Button,
+  ButtonWrapper,
+  DatePicker,
   FormWrapper,
   Label,
   TextArea,
