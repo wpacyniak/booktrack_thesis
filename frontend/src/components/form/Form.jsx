@@ -6,9 +6,12 @@ import {
   Wrapper,
   Cover,
   Button,
+  Label,
+  TextArea,
   FormWrapper,
 } from "./styles";
 import { Input } from "../input/Input";
+import { StarPicker } from "../starPicker/StarPicker";
 import { useState } from "react";
 
 const modalStyles = {
@@ -107,12 +110,15 @@ export const Form = ({ isOpen, setIsOpen, type }) => {
         </FormWrapper>
         {type == "read" ? (
           <FormWrapper>
-            <Input
-              label="Notatka"
+            <Label>Notatka</Label>
+            <TextArea
               onChange={(e) => onChangeNote(e.target.value)}
-              type="text"
+              rows="5"
+              placeholder="Notatka"
             />
-            {/* datepicker + rate + wydluz dla note*/}
+            <Label>Ocena</Label>
+            <StarPicker value={rate} setValue={setRate} />
+            {/* datepicker + rate*/}
           </FormWrapper>
         ) : null}
         <Cover

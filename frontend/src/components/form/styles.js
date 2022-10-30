@@ -65,4 +65,40 @@ const FormWrapper = styled.div`
   flex-direction: column;
 `;
 
-export { CloseButton, Title, Wrapper, Cover, Button, FormWrapper };
+const Label = styled.div`
+  margin-top: 10px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  color: ${colors.violet_dark};
+  letter-spacing: 3px;
+  text-transform: uppercase;
+`;
+
+const TextArea = styled.textarea`
+  width: 200px;
+  border: none;
+  border-radius: 15px;
+  font-family: "DM Sans";
+  font-style: normal;
+  padding: 10px;
+  font-size: 20px;
+  color: ${colors.violet_dark};
+  margin-top: 5px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export {
+  CloseButton,
+  Title,
+  Wrapper,
+  Cover,
+  Button,
+  FormWrapper,
+  Label,
+  TextArea,
+};
