@@ -119,7 +119,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
       ) {
         setErrorText("Wszystkie pola muszą być wypełnione!");
       }
-      const id = book.id ? book.id : 0;
+      const id = book?.id ? book.id : 0;
       body = {
         id,
         author,

@@ -6,13 +6,16 @@ import {
   Author,
   TextRead,
   Button,
+  DeleteButton,
   ButtonsWrapper,
 } from "./styles";
 import { Form } from "../../components/form/Form";
 import { useNavigate } from "react-router-dom";
 import { FaRegStar } from "react-icons/fa";
+import { useStore } from "../../Store";
 
-export const Book = ({ book, type }) => {
+export const Book = ({ book, type, deleteBook }) => {
+  const { state } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,8 +30,9 @@ export const Book = ({ book, type }) => {
   }
 
   return (
-    <Wrapper onClick={handleClick}>
-      <Cover src={book.cover} alt="cover" />
+    <Wrapper>
+      <DeleteButton onClick={() => deleteBook(book.id)}>Usuń</DeleteButton>
+      <Cover src={book.cover} alt="cover" type={type} onClick={handleClick} />
       <Title>{book.name}</Title>
       <Author>
         {type === "plan" ? `${book.author} | ${book.pages} stron` : book.author}{" "}

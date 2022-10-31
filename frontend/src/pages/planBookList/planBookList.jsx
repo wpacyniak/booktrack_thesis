@@ -6,6 +6,7 @@ import { AddButton } from "../../components/addButton/AddButton";
 import { Book } from "../../components/book/Book";
 import { Form } from "../../components/form/Form";
 import { useStore } from "../../Store";
+import { ErrorModal } from "../../components/errorModal/ErrorModal";
 
 export const PlanBookList = () => {
   const type = "plan";
@@ -13,10 +14,13 @@ export const PlanBookList = () => {
 
   const [plans, setPlans] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     getBookPlans();
-  }, [isOpen]);
+  }, [isOpen, isDeleted]);
 
   const getBookPlans = async () => {
     const res = await fetch("http://localhost:5000/book_plans", {
@@ -37,14 +41,41 @@ export const PlanBookList = () => {
     setIsOpen(!isOpen);
   };
 
+  async function deleteBook(bookId) {
+    const body = { bookId: bookId };
+    const res = await fetch("http://localhost:5000/delete_book", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(body),
+    });
+
+    if (res.status === 200) {
+      setText("Poprawnie usunięto!");
+      setIsDeleted(!isDeleted);
+      return;
+    }
+    setText("Coś poszło nie tak!");
+  }
+
   return (
     <Wrapper>
       <Header />
       <Title>Plany czytelnicze</Title>
+      <ErrorModal isOpen={isModalOpen} text={text} setIsOpen={setIsModalOpen} />
       <ListWrapper>
         {plans?.length != 0 &&
           plans.map((book, index) => {
-            return <Book key={index} book={book} type={type} />;
+            return (
+              <Book
+                key={index}
+                book={book}
+                type={type}
+                deleteBook={deleteBook}
+              />
+            );
           })}
         <AddButton onClick={onClick} />
         <Form isOpen={isOpen} setIsOpen={setIsOpen} type={type} />

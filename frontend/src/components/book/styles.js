@@ -11,6 +11,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 `;
 
 const Title = styled.p`
@@ -36,6 +38,7 @@ const Cover = styled.img`
   width: 200px;
   margin: 20px 0;
   max-height: 280px;
+  cursor: ${(props) => props.type == "read" && "pointer"};
 `;
 
 const TextRead = styled.p`
@@ -70,4 +73,29 @@ const ButtonsWrapper = styled.div`
   gap: 10px;
 `;
 
-export { Wrapper, Title, Author, Cover, TextRead, ButtonsWrapper, Button };
+const DeleteButton = styled.div`
+  position: absolute;
+  top: 10px;
+  left: -40px;
+  border-radius: 15px;
+  color: ${colors.white};
+  text-transform: uppercase;
+  background-color: ${colors.violet_dark};
+  padding: 5px 20px;
+  &:hover {
+    cursor: pointer;
+    left: -10px;
+    background-color: ${colors.violet_hover};
+  }
+`;
+
+export {
+  Wrapper,
+  Title,
+  Author,
+  Cover,
+  TextRead,
+  ButtonsWrapper,
+  Button,
+  DeleteButton,
+};

@@ -20,6 +20,7 @@ const Logo = styled.img`
 
 const ListWrapper = styled.div`
   position: relative;
+  z-index: 1;
 `;
 
 const OptionsWrapper = styled.div`

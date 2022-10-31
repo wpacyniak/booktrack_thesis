@@ -68,3 +68,9 @@ def get_plans():
                            plan["cover"])
             plans.append(db_plan.to_json_plan())
     return plans
+
+
+def delete_book(book_id):
+    res = db["books"].delete_one(
+        {"_id": ObjectId(book_id)})
+    return res
