@@ -1,6 +1,6 @@
 import { Label, Input } from "./styles";
 
-export const Input = ({ label, onChange, type }) => {
+export const Input = ({ label, onChange, type, value }) => {
   return (
     <div>
       <Label htmlFor={label}>{label}</Label>
@@ -9,6 +9,7 @@ export const Input = ({ label, onChange, type }) => {
         name={label}
         id={label}
         placeholder={label}
+        value={value}
         onChange={onChange}
       />
     </div>

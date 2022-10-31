@@ -15,7 +15,7 @@ import {
 } from "./styles";
 import { Input } from "../input/Input";
 import { StarPicker } from "../starPicker/StarPicker";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useStore } from "../../Store";
 
 const modalStyles = {
@@ -38,7 +38,7 @@ const modalStyles = {
   },
 };
 
-export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
+export const Form = ({ isOpen, setIsOpen, type, book }) => {
   const { state } = useStore();
   Modal.setAppElement("#root");
   const [errorText, setErrorText] = useState("");
@@ -50,6 +50,35 @@ export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
   const [quote, setQuote] = useState("");
   const [rate, setRate] = useState(0);
   const [date, setDate] = useState("");
+
+  useEffect(() => {
+    if (book) {
+      if (book.author) {
+        setAuthor(book.author);
+      }
+      if (book.title) {
+        setTitle(book.title);
+      }
+      if (book.pages) {
+        setPages(book.pages);
+      }
+      if (book.cover) {
+        setCover(book.cover);
+      }
+      if (book.note) {
+        setNote(book.note);
+      }
+      if (book.quote) {
+        setQuote(book.quote);
+      }
+      if (book.rate) {
+        setRate(book.rate);
+      }
+      if (book.date) {
+        setDate(book.date);
+      }
+    }
+  }, []);
 
   function closeModal() {
     setIsOpen(!isOpen);
@@ -90,7 +119,7 @@ export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
       ) {
         setErrorText("Wszystkie pola muszą być wypełnione!");
       }
-      const id = bookId ? bookId : 0;
+      const id = book.id ? book.id : 0;
       body = {
         id,
         author,
@@ -143,27 +172,32 @@ export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
         <FormWrapper>
           <Input
             label="Tytuł"
+            value={title}
             onChange={(e) => onChangeTitle(e.target.value)}
             type="text"
           />
           <Input
             label="Autor"
+            value={author}
             onChange={(e) => onChangeAuthor(e.target.value)}
             type="text"
           />
           <Input
             label="Liczba stron"
+            value={pages}
             onChange={(e) => onChangePages(e.target.value)}
             type="number"
           />
           <Input
             label="Okładka"
+            value={cover}
             onChange={(e) => onChangeCover(e.target.value)}
             type="text"
           />
           {type == "read" ? (
             <Input
               label="Cytat"
+              value={quote}
               onChange={(e) => onChangeQuote(e.target.value)}
               type="text"
             />
@@ -176,6 +210,7 @@ export const Form = ({ isOpen, setIsOpen, type, bookId }) => {
               onChange={(e) => onChangeNote(e.target.value)}
               rows="6"
               placeholder="Notatka"
+              value={note}
             />
             <Label>Ocena</Label>
             <StarPicker value={rate} setValue={setRate} />
