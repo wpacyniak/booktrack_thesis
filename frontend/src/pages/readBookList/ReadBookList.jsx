@@ -15,7 +15,7 @@ export const ReadBookList = () => {
 
   useEffect(() => {
     getBooks();
-  }, [state.year]);
+  }, [state.year, isOpen]);
 
   const getBooks = async () => {
     const year = state.year;

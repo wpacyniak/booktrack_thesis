@@ -16,7 +16,7 @@ export const PlanBookList = () => {
 
   useEffect(() => {
     getBookPlans();
-  }, []);
+  }, [isOpen]);
 
   const getBookPlans = async () => {
     const res = await fetch("http://localhost:5000/book_plans", {
