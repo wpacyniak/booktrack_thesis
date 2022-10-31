@@ -35,6 +35,7 @@ const Author = styled.p`
 const Cover = styled.img`
   width: 200px;
   margin: 20px 0;
+  max-height: 280px;
 `;
 
 const TextRead = styled.p`
