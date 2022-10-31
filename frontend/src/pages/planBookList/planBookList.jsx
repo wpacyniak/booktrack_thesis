@@ -4,6 +4,7 @@ import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { AddButton } from "../../components/addButton/AddButton";
 import { Book } from "../../components/book/Book";
+import { Form } from "../../components/form/Form";
 import { useStore } from "../../Store";
 
 export const PlanBookList = () => {
@@ -32,6 +33,10 @@ export const PlanBookList = () => {
     }
   };
 
+  const onClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Wrapper>
       <Header />
@@ -41,7 +46,8 @@ export const PlanBookList = () => {
           plans.map((book, index) => {
             return <Book key={index} book={book} type={type} />;
           })}
-        <AddButton />
+        <AddButton onClick={onClick} />
+        <Form isOpen={isOpen} setIsOpen={setIsOpen} type={type} />
       </ListWrapper>
       <Footer />
     </Wrapper>

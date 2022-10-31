@@ -32,6 +32,9 @@ const modalStyles = {
     border: "none",
     backgroundColor: colors.pink_light,
     boxShadow: `10px 10px ${colors.violet_hover}`,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
   },
 };
 

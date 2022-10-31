@@ -29,7 +29,7 @@ class Book():
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
                 'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': True, 'user_id': ObjectId(user_id)}
 
-    def to_bson(self, user_id):
+    def to_bson(self, user_id, is_read):
         return {'author': self.author, 'title': self.title, 'is_read': True,
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
-                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': True, 'user_id': ObjectId(user_id)}
+                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': is_read, 'user_id': ObjectId(user_id)}

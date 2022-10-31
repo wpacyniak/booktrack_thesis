@@ -19,8 +19,7 @@ export const ReadBookList = () => {
 
   const getBooks = async () => {
     const year = state.year;
-    const userId = state.user.id;
-    body = { year, userId };
+    body = { year };
     const res = await fetch("http://localhost:5000/read_books", {
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +50,7 @@ export const ReadBookList = () => {
             return <Book key={index} book={book} type={type} />;
           })}
         <AddButton onClick={onClick} />
-        <Form isOpen={isOpen} setIsOpen={setIsOpen} type="read" />
+        <Form isOpen={isOpen} setIsOpen={setIsOpen} type={type} />
       </ListWrapper>
       <Footer />
     </Wrapper>

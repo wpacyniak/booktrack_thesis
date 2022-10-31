@@ -7,9 +7,9 @@ from datetime import datetime
 import sys
 
 
-def get_read_books_year(year, user_id):
+def get_read_books_year(year):
     db_books = db["books"].find(
-        {"user_id": ObjectId(user_id), "is_read": True})
+        {"user_id": ObjectId(user_session.user_id), "is_read": True})
     if db_books is not None:
         books = []
         for book in db_books:
@@ -36,17 +36,20 @@ def add_book(author, title, pages, cover, note, quote, rate, date):
     book = Book(None, author, title, note, int(pages),
                 quote, int(rate), read_date, cover)
     db["books"].insert_one(book.to_bson(
-        user_session.user_id))
+        user_session.user_id, True))
 
 
 def update_book(id, author, title, pages, cover, note, quote, rate, date):
     read_date = datetime.strptime(date, '%y-%m-%d')
-    db["books"].replace_one({"_id": ObjectId(user_session)}, Book(id, author, title, note, int(
-        pages), quote, int(rate), read_date, cover).to_bson_update(user_session))
+    db["books"].replace_one({"_id": ObjectId(user_session.user_id)}, Book(id, author, title, note, int(
+        pages), quote, int(rate), read_date, cover).to_bson_update(user_session.user_id))
 
 
 def add_plan(author, title, pages, cover):
-    pass
+    plan = Book(None, author, title, None, int(pages),
+                None, None, None, cover)
+    db["books"].insert_one(plan.to_bson(
+        user_session.user_id, False))
 
 
 def get_plans():

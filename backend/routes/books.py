@@ -10,8 +10,7 @@ from backend.controllers.books import get_read_books_year, add_book, update_book
 def get_read_books_per_year():
     data = request.json
     year = data["year"]
-    user_id = data["userId"]
-    books = get_read_books_year(year, user_id)
+    books = get_read_books_year(year)
     if books is None:
         return Response(status=400)
     else:
