@@ -2,7 +2,7 @@ from backend import app
 from flask import request, Response, jsonify
 from flask_jwt_extended import jwt_required
 
-from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan
+from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan, get_plans
 
 
 @app.route('/read_books', methods=['POST'])
@@ -49,3 +49,13 @@ def add_book_plan():
     except Exception as e:
         return e.args[0], 400
     return Response(status=200)
+
+
+@app.route('/book_plans', methods=['GET'])
+@jwt_required()
+def get_book_plans():
+    plans = get_plans()
+    if plans is None:
+        return Response(status=400)
+    else:
+        return jsonify(plans)

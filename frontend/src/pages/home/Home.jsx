@@ -55,6 +55,10 @@ export const Home = () => {
     );
   }, []);
 
+  function addReadBook() {
+    // JAK DOROBISZ OBECNIE CZYTANĄ KSIĄŻKĘ TO SIĘ TYM ZAJMIJ
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -109,7 +113,7 @@ export const Home = () => {
             />
           </ProgressWrapper>
           <ButtonWrapper>
-            <BookButton>Przeczytana</BookButton>
+            <BookButton onClik={addReadBook}>Przeczytana</BookButton>
           </ButtonWrapper>
         </InfoWrapper>
       </BookWrapper>

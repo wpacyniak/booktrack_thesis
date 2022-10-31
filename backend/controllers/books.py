@@ -47,3 +47,18 @@ def update_book(id, author, title, pages, cover, note, quote, rate, date):
 
 def add_plan(author, title, pages, cover):
     pass
+
+
+def get_plans():
+    db_plans = db["books"].find(
+        {"user_id": ObjectId(user_session.user_id), "is_read": False})
+    if db_plans is not None:
+        plans = []
+        for plan in db_plans:
+            db_plan = Book(str(plan["_id"]), plan["author"],
+                           plan["title"], None,
+                           plan["pages"], None,
+                           None, None,
+                           plan["cover"])
+            plans.append(db_plan.to_json_plan())
+    return plans
