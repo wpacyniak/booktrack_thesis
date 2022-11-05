@@ -50,8 +50,18 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
   const [quote, setQuote] = useState("");
   const [rate, setRate] = useState(0);
   const [date, setDate] = useState("");
+  const [text, setText] = useState("");
 
   useEffect(() => {
+    if (type == "read") {
+      setText("Dodaj przeczytaną książkę:");
+    } else if (type == "updateBook") {
+      setText("Edytuj przeczytaną książkę:");
+    } else if (type == "updatePlan") {
+      setText("Edytuj plan czytelniczy:");
+    } else if (type == "plan") {
+      setText("Dodaj plan czytelniczy:");
+    }
     if (book) {
       if (book.author) {
         setAuthor(book.author);
@@ -74,11 +84,27 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
       if (book.rate) {
         setRate(book.rate);
       }
-      if (book.date) {
-        setDate(book.date);
+      if (book.readDate) {
+        setDate(getDate(book.readDate));
       }
     }
   }, []);
+
+  function getDate(value) {
+    newDate = new Date(value);
+
+    const day = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+
+    return (
+      year +
+      "-" +
+      month.toString().padStart(2, "0") +
+      "-" +
+      day.toString().padStart(2, "0")
+    );
+  }
 
   function closeModal() {
     setIsOpen(!isOpen);
@@ -106,7 +132,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
 
   async function addRecord() {
     var body = {};
-    if (type == "read") {
+    if (type == "read" || type == "updateBook") {
       if (
         !author ||
         !title ||
@@ -130,18 +156,20 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
         quote,
         rate,
         date,
-        type: "read",
+        type: { type },
       };
-    } else if (type == "plan") {
+    } else if (type == "plan" || type == "updatePlan") {
       if (!author || !title || !pages || !cover) {
         setErrorText("Wszystkie pola muszą być wypełnione!");
       }
+      const id = book?.id ? book.id : 0;
       body = {
+        id,
         author,
         title,
         pages,
         cover,
-        type: "plan",
+        type: { type },
       };
     }
     const res = await fetch("http://localhost:5000/add_book", {
@@ -163,11 +191,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
   return (
     <Modal isOpen={isOpen} onRequestClose={closeModal} style={modalStyles}>
       <CloseButton onClick={closeModal}>X</CloseButton>
-      <Title>
-        {type == "read"
-          ? "Dodaj przeczytaną książkę:"
-          : "Dodaj plan czytelniczy:"}
-      </Title>
+      <Title>{text}</Title>
       <Wrapper>
         <FormWrapper>
           <Input
@@ -203,7 +227,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
             />
           ) : null}
         </FormWrapper>
-        {type == "read" ? (
+        {type == "read" || type == "updateBook" ? (
           <FormWrapper>
             <Label>Notatka</Label>
             <TextArea
@@ -215,7 +239,11 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
             <Label>Ocena</Label>
             <StarPicker value={rate} setValue={setRate} />
             <Label>Data przeczytania</Label>
-            <DatePicker type="date" onChange={(e) => setDate(e.target.value)} />
+            <DatePicker
+              type="date"
+              onChange={(e) => setDate(e.target.value)}
+              value={date}
+            />
           </FormWrapper>
         ) : null}
         <Cover

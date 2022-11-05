@@ -76,12 +76,34 @@ const ButtonsWrapper = styled.div`
 const DeleteButton = styled.div`
   position: absolute;
   top: 10px;
-  left: -40px;
+  left: -65px;
   border-radius: 15px;
   color: ${colors.white};
   text-transform: uppercase;
   background-color: ${colors.violet_dark};
   padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  &:hover {
+    cursor: pointer;
+    left: -10px;
+    background-color: ${colors.violet_hover};
+  }
+`;
+
+const EditButton = styled.div`
+  position: absolute;
+  top: 50px;
+  left: -85px;
+  border-radius: 15px;
+  color: ${colors.white};
+  text-transform: uppercase;
+  background-color: ${colors.violet_dark};
+  padding: 5px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   &:hover {
     cursor: pointer;
     left: -10px;
@@ -98,4 +120,5 @@ export {
   ButtonsWrapper,
   Button,
   DeleteButton,
+  EditButton,
 };
