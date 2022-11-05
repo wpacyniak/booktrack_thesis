@@ -66,7 +66,7 @@ export const ReadBookList = () => {
   return (
     <Wrapper>
       <Header />
-      <Title>Przeczytane książki:</Title>
+      <Title>Przeczytane książki w {state.year} roku:</Title>
       <ErrorModal isOpen={isModalOpen} text={text} setIsOpen={setIsModalOpen} />
       <ListWrapper>
         {books?.length != 0 &&

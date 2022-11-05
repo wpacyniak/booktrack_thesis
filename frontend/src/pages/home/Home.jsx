@@ -65,7 +65,7 @@ export const Home = () => {
       <Welcome>Cześć, {state.user.username}!</Welcome>
       <GoalWrapper>
         <TextWrapper>
-          <Goal>Twój cel na {new Date().getFullYear()} rok:</Goal>
+          <Goal>Cel na {new Date().getFullYear()} rok:</Goal>
           <GoalSubText>
             {user.yearlyProgress}/{user.yearlyGoal} książek
           </GoalSubText>
