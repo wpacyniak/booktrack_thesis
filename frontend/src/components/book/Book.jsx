@@ -17,7 +17,7 @@ import { useStore } from "../../Store";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-export const Book = ({ book, type, deleteBook }) => {
+export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
   const { state } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
@@ -32,6 +32,13 @@ export const Book = ({ book, type, deleteBook }) => {
   function handleReadButton() {
     setIsOpen(!isOpen);
   }
+
+  function handleSetIsModalOpen(value) {
+    setIsModalEditOpen(value);
+    if (value === false) {
+      setIsChanged(!isChanged);
+    }
+  }
   return (
     <Wrapper>
       <DeleteButton onClick={() => deleteBook(book.id)}>
@@ -41,7 +48,7 @@ export const Book = ({ book, type, deleteBook }) => {
         Edytuj <FiEdit />
       </EditButton>
       <Cover src={book.cover} alt="cover" type={type} onClick={handleClick} />
-      <Title>{book.name}</Title>
+      <Title>{book.title}</Title>
       <Author>
         {type === "plan" ? `${book.author} | ${book.pages} stron` : book.author}{" "}
       </Author>
@@ -62,7 +69,7 @@ export const Book = ({ book, type, deleteBook }) => {
       )}
       <Form
         isOpen={isModalEditOpen}
-        setIsOpen={setIsModalEditOpen}
+        setIsOpen={handleSetIsModalOpen}
         type={type == "read" ? "updateBook" : "updatePlan"}
         book={book}
       />

@@ -16,11 +16,11 @@ export const PlanBookList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     getBookPlans();
-  }, [isOpen, isDeleted]);
+  }, [isOpen, isChanged]);
 
   const getBookPlans = async () => {
     const res = await fetch("http://localhost:5000/book_plans", {
@@ -41,6 +41,13 @@ export const PlanBookList = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleIsOpen = (value) => {
+    setIsOpen(value);
+    if (value == false) {
+      setIsChanged(!isChanged);
+    }
+  };
+
   async function deleteBook(bookId) {
     const body = { bookId: bookId };
     const res = await fetch("http://localhost:5000/delete_book", {
@@ -54,10 +61,12 @@ export const PlanBookList = () => {
 
     if (res.status === 200) {
       setText("Poprawnie usunięto!");
-      setIsDeleted(!isDeleted);
+      setIsChanged(!isChanged);
+      setIsModalOpen(!isModalOpen);
       return;
     }
     setText("Coś poszło nie tak!");
+    setIsModalOpen(!isModalOpen);
   }
 
   return (
@@ -74,11 +83,13 @@ export const PlanBookList = () => {
                 book={book}
                 type={type}
                 deleteBook={deleteBook}
+                isChanged={isChanged}
+                setIsChanged={setIsChanged}
               />
             );
           })}
         <AddButton onClick={onClick} />
-        <Form isOpen={isOpen} setIsOpen={setIsOpen} type={type} />
+        <Form isOpen={isOpen} setIsOpen={handleIsOpen} type={type} />
       </ListWrapper>
       <Footer />
     </Wrapper>

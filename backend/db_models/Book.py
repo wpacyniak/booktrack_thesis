@@ -22,14 +22,14 @@ class Book():
 
     def to_json_plan(self):
         return {'id': self.id, 'author': self.author, 'title': self.title,
-                'pages': self.pages, 'cover': self.cover}
+                'pages': self.pages, 'cover': self.cover, 'is_read': False}
 
-    def to_bson_update(self, user_id):
+    def to_bson_update(self, user_id, is_read):
         return {'id': ObjectId(self.id), 'author': self.author, 'title': self.title,
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
-                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': True, 'user_id': ObjectId(user_id)}
+                'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': is_read, 'user_id': ObjectId(user_id)}
 
     def to_bson(self, user_id, is_read):
-        return {'author': self.author, 'title': self.title, 'is_read': True,
+        return {'author': self.author, 'title': self.title,
                 'note': self.note, 'pages': self.pages, 'quote': self.quote,
                 'rate': self.rate, 'read_date': self.read_date, 'cover': self.cover, 'is_read': is_read, 'user_id': ObjectId(user_id)}

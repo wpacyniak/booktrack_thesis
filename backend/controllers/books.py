@@ -44,8 +44,15 @@ def update_book(id, author, title, pages, cover, note, quote, rate, date):
         date + "T00:00:00+00:00", '%Y-%m-%dT%H:%M:%S%z')
     book = Book(id, author, title, note, int(pages),
                 quote, int(rate), read_date, cover)
-    db["books"].replace_one({"_id": ObjectId(
-        user_session.user_id)}, book.to_bson_update(user_session.user_id))
+    db["books"].replace_one({"_id": ObjectId(id)},
+                            book.to_bson_update(user_session.user_id, True))
+
+
+def update_plan(id, author, title, pages, cover):
+    plan = Book(id, author, title, None, int(pages),
+                None, None, None, cover)
+    db["books"].replace_one({"_id": ObjectId(id)},
+                            plan.to_bson_update(user_session.user_id, False))
 
 
 def add_plan(author, title, pages, cover):

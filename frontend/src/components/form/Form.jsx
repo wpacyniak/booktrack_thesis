@@ -109,6 +109,14 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
   function closeModal() {
     setIsOpen(!isOpen);
     setErrorText("");
+    setAuthor("");
+    setTitle("");
+    setPages(0);
+    setCover("");
+    setNote("");
+    setQuote("");
+    setRate(0);
+    setDate("");
   }
 
   function onChangeTitle(value) {
@@ -156,7 +164,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
         quote,
         rate,
         date,
-        type: { type },
+        type: type,
       };
     } else if (type == "plan" || type == "updatePlan") {
       if (!author || !title || !pages || !cover) {
@@ -169,9 +177,10 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
         title,
         pages,
         cover,
-        type: { type },
+        type: type,
       };
     }
+    console.log(body);
     const res = await fetch("http://localhost:5000/add_book", {
       headers: {
         "Content-Type": "application/json",

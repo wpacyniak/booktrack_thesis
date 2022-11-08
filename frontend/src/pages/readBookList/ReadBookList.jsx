@@ -16,11 +16,11 @@ export const ReadBookList = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     getBooks();
-  }, [state.year, isOpen, isDeleted]);
+  }, [state.year, isOpen, isChanged]);
 
   const getBooks = async () => {
     const year = state.year;
@@ -57,11 +57,20 @@ export const ReadBookList = () => {
 
     if (res.status === 200) {
       setText("Poprawnie usunięto!");
-      setIsDeleted(!isDeleted);
+      setIsChanged(!isChanged);
+      setIsModalOpen(!isModalOpen);
       return;
     }
     setText("Coś poszło nie tak!");
+    setIsModalOpen(!isModalOpen);
   }
+
+  const handleIsOpen = (value) => {
+    setIsOpen(value);
+    if (value == false) {
+      setIsChanged(!isChanged);
+    }
+  };
 
   return (
     <Wrapper>
@@ -77,11 +86,13 @@ export const ReadBookList = () => {
                 book={book}
                 type={type}
                 deleteBook={deleteBook}
+                isChanged={isChanged}
+                setIsChanged={setIsChanged}
               />
             );
           })}
         <AddButton onClick={onClick} />
-        <Form isOpen={isOpen} setIsOpen={setIsOpen} type={type} />
+        <Form isOpen={isOpen} setIsOpen={handleIsOpen} type={type} />
       </ListWrapper>
       <Footer />
     </Wrapper>
