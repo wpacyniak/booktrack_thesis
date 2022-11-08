@@ -47,13 +47,32 @@ const currentlyReading = {
 export const Home = () => {
   const [bookProgress, setBookProgress] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const { state } = useStore();
+  const { state, dispatch } = useStore();
 
   useEffect(() => {
     setBookProgress(
       Math.round((currentlyReading.progress * 100) / currentlyReading.pages, 2)
     );
+    getYearsList();
   }, []);
+
+  async function getYearsList() {
+    const res = await fetch("http://localhost:5000/get_years", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "GET",
+    });
+
+    if (res.status === 200) {
+      const years = await res.json();
+      dispatch({ type: "SET_YEARS_LIST", payload: years });
+      return;
+    }
+    const value = new Date().getFullYear();
+    dispatch({ type: "SET_YEARS_LIST", payload: [value] });
+  }
 
   function addReadBook() {
     // JAK DOROBISZ OBECNIE CZYTANĄ KSIĄŻKĘ TO SIĘ TYM ZAJMIJ

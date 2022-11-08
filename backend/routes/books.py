@@ -2,7 +2,7 @@ from backend import app
 from flask import request, Response, jsonify
 from flask_jwt_extended import jwt_required
 
-from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan, get_plans, delete_book, update_plan
+from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan, get_plans, delete_book, update_plan, get_years
 
 
 @app.route('/read_books', methods=['POST'])
@@ -71,5 +71,15 @@ def delete_book_plan():
     res = delete_book(book_id)
     if res:
         return Response(status=200)
+    else:
+        return Response(status=400)
+
+
+@app.route('/get_years', methods=['GET'])
+@jwt_required()
+def get_list_years():
+    years = get_years()
+    if years:
+        return jsonify(years)
     else:
         return Response(status=400)

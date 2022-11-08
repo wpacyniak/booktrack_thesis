@@ -4,7 +4,6 @@ from backend.controllers.session import user_session
 from backend import db
 from bson.objectid import ObjectId
 from datetime import datetime
-import sys
 
 
 def get_read_books_year(year):
@@ -81,3 +80,16 @@ def delete_book(book_id):
     res = db["books"].delete_one(
         {"_id": ObjectId(book_id)})
     return res
+
+
+def get_years():
+    db_dates = db["books"].distinct('read_date',
+                                    {"user_id": ObjectId(user_session.user_id), 'is_read': True})
+    current_year = datetime.now().year
+    years = [int(current_year)]
+    for date in db_dates:
+        year = int(date.year)
+        if year not in years:
+            years.append(year)
+    sorted_years = sorted(years)
+    return sorted_years

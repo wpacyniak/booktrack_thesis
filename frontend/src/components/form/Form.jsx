@@ -180,7 +180,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
         type: type,
       };
     }
-    console.log(body);
+
     const res = await fetch("http://localhost:5000/add_book", {
       headers: {
         "Content-Type": "application/json",
