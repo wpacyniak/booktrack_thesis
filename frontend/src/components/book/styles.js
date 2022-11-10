@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { colors } from "../../resources/constants";
 
 const Wrapper = styled.div`
@@ -15,6 +15,21 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
+const slide = keyframes`
+  from {
+    left: 0
+  };
+  to {
+    left: -100%;
+  };
+`;
+
+const TitleWrapper = styled.div`
+  overflow: hidden;
+  width: 200px;
+  text-align: center;
+`;
+
 const Title = styled.p`
   font-family: "DM Sans";
   font-style: normal;
@@ -22,9 +37,18 @@ const Title = styled.p`
   text-transform: uppercase;
   max-width: 200px;
   color: ${colors.violet_dark};
+  position: relative;
   white-space: nowrap;
+
+  &: hover {
+    animation: 3s linear 0s ${slide} infinite;
+  }
+`;
+
+const AuthorWrapper = styled.div`
   overflow: hidden;
-  text-overflow: ellipsis;
+  width: 200px;
+  text-align: center;
 `;
 
 const Author = styled.p`
@@ -32,6 +56,12 @@ const Author = styled.p`
   font-style: normal;
   font-size: 14px;
   color: ${colors.violet_dark};
+  white-space: nowrap;
+  position: relative;
+
+  &: hover {
+    animation: 3s linear 0s ${slide} infinite;
+  }
 `;
 
 const Cover = styled.img`
@@ -120,5 +150,7 @@ export {
   ButtonsWrapper,
   Button,
   DeleteButton,
+  AuthorWrapper,
   EditButton,
+  TitleWrapper,
 };

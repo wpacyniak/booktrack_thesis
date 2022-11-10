@@ -10,7 +10,7 @@ import { ErrorModal } from "../../components/errorModal/ErrorModal";
 
 export const PlanBookList = () => {
   const type = "plan";
-  const { state } = useStore();
+  const { dispatch, state } = useStore();
 
   const [plans, setPlans] = useState([]);
   const [isOpen, setIsOpen] = useState(false);

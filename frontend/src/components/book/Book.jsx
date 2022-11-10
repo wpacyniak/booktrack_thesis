@@ -6,9 +6,11 @@ import {
   Author,
   TextRead,
   Button,
+  TitleWrapper,
   DeleteButton,
   EditButton,
   ButtonsWrapper,
+  AuthorWrapper,
 } from "./styles";
 import { Form } from "../../components/form/Form";
 import { useNavigate } from "react-router-dom";
@@ -48,10 +50,16 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
         Edytuj <FiEdit />
       </EditButton>
       <Cover src={book.cover} alt="cover" type={type} onClick={handleClick} />
-      <Title>{book.title}</Title>
-      <Author>
-        {type === "plan" ? `${book.author} | ${book.pages} stron` : book.author}{" "}
-      </Author>
+      <TitleWrapper>
+        <Title>{book.title}</Title>
+      </TitleWrapper>
+      <AuthorWrapper>
+        <Author>
+          {type === "plan"
+            ? `${book.author} | ${book.pages} stron`
+            : book.author}{" "}
+        </Author>
+      </AuthorWrapper>
       {type === "read" && (
         <TextRead>
           <span>
