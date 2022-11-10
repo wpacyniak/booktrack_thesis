@@ -35,16 +35,26 @@ export const ReadBookList = () => {
 
   const getBooks = async () => {
     const year = state.year;
-    body = { year };
-    const res = await fetch("http://localhost:5000/read_books", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${state.auth_token}`,
-      },
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
+    var res = {};
+    if (year === "all") {
+      res = await fetch("http://localhost:5000/read_all_books", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.auth_token}`,
+        },
+        method: "GET",
+      });
+    } else {
+      body = { year };
+      res = await fetch("http://localhost:5000/read_books", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.auth_token}`,
+        },
+        method: "POST",
+        body: JSON.stringify(body),
+      });
+    }
     if (res.status == 200) {
       const booksDb = await res.json();
       setBooks(booksDb);

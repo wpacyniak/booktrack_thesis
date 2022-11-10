@@ -2,7 +2,7 @@ from backend import app
 from flask import request, Response, jsonify
 from flask_jwt_extended import jwt_required
 
-from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan, get_plans, delete_book, update_plan, get_years
+from backend.controllers.books import get_read_books_year, add_book, update_book, add_plan, get_plans, delete_book, update_plan, get_years, get_read_books
 
 
 @app.route('/read_books', methods=['POST'])
@@ -11,6 +11,16 @@ def get_read_books_per_year():
     data = request.json
     year = data["year"]
     books = get_read_books_year(year)
+    if books is None:
+        return Response(status=400)
+    else:
+        return jsonify(books)
+
+
+@app.route('/read_all_books', methods=['GET'])
+@jwt_required()
+def get_read_all_books():
+    books = get_read_books()
     if books is None:
         return Response(status=400)
     else:
