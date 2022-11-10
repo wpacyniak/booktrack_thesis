@@ -38,6 +38,8 @@ export const Login = () => {
       const { user, token } = await res.json();
       dispatch({ type: "SET_USER", payload: user });
       dispatch({ type: "SET_AUTH_TOKEN", payload: token });
+      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('token',JSON.stringify(token));
       navigate("/home");
       return;
     }

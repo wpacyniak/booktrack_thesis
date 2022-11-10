@@ -50,11 +50,22 @@ export const Home = () => {
   const { state, dispatch } = useStore();
 
   useEffect(() => {
+    if (!state.user || !state.auth_token) {
+      dispatch({
+        type: "SET_USER",
+        payload: JSON.parse(localStorage.getItem("user")),
+      });
+      dispatch({
+        type: "SET_AUTH_TOKEN",
+        payload: JSON.parse(localStorage.getItem("token")),
+      });
+    } else {
+      getYearsList();
+    }
     setBookProgress(
       Math.round((currentlyReading.progress * 100) / currentlyReading.pages, 2)
     );
-    getYearsList();
-  }, []);
+  }, [state.user, state.token]);
 
   async function getYearsList() {
     const res = await fetch("http://localhost:5000/get_years", {
@@ -68,10 +79,12 @@ export const Home = () => {
     if (res.status === 200) {
       const years = await res.json();
       dispatch({ type: "SET_YEARS_LIST", payload: years });
+      localStorage.setItem("years_list", JSON.stringify(years));
       return;
     }
     const value = new Date().getFullYear();
     dispatch({ type: "SET_YEARS_LIST", payload: [value] });
+    localStorage.setItem("years_list", JSON.stringify([value]));
   }
 
   function addReadBook() {
@@ -81,7 +94,7 @@ export const Home = () => {
   return (
     <Wrapper>
       <Header />
-      <Welcome>Cześć, {state.user.username}!</Welcome>
+      <Welcome>Cześć, {state.user?.username}!</Welcome>
       <GoalWrapper>
         <TextWrapper>
           <Goal>Cel na {new Date().getFullYear()} rok:</Goal>

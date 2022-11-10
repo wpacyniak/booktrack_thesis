@@ -19,8 +19,15 @@ export const PlanBookList = () => {
   const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
-    getBookPlans();
-  }, [isOpen, isChanged]);
+    if (state.auth_token) {
+      getBookPlans();
+    } else {
+      dispatch({
+        type: "SET_AUTH_TOKEN",
+        payload: JSON.parse(localStorage.getItem("token")),
+      });
+    }
+  }, [isOpen, isChanged, state.auth_token]);
 
   const getBookPlans = async () => {
     const res = await fetch("http://localhost:5000/book_plans", {

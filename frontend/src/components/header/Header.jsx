@@ -18,7 +18,14 @@ export const Header = () => {
   const [years, setYears] = useState([]);
 
   useEffect(() => {
-    setYears(state.yearsList);
+    if (!state.yearsList) {
+      dispatch({
+        type: "SET_YEARS_LIST",
+        payload: JSON.parse(localStorage.getItem("years_list")),
+      });
+    } else {
+      setYears(state.yearsList);
+    }
   }, [state.yearsList]);
 
   function handleHome() {
@@ -27,11 +34,11 @@ export const Header = () => {
 
   function handleList() {
     setIsExpanded(!isExpanded);
-    // navigate("/readBooks");
   }
 
   function handleClickYear(year) {
     dispatch({ type: "SET_YEAR", payload: year });
+    localStorage.setItem("year", JSON.stringify(year));
     setIsExpanded(!isExpanded);
     navigate("/readBooks");
   }

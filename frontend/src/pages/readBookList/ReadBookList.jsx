@@ -9,7 +9,7 @@ import { useStore } from "../../Store";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 
 export const ReadBookList = () => {
-  const { state } = useStore();
+  const { state, dispatch } = useStore();
   const type = "read";
 
   const [books, setBooks] = useState([]);
@@ -19,8 +19,19 @@ export const ReadBookList = () => {
   const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
-    getBooks();
-  }, [state.year, isOpen, isChanged]);
+    if (!state.auth_token || !state.year) {
+      dispatch({
+        type: "SET_AUTH_TOKEN",
+        payload: JSON.parse(localStorage.getItem("token")),
+      });
+      dispatch({
+        type: "SET_YEAR",
+        payload: JSON.parse(localStorage.getItem("year")),
+      });
+    } else {
+      getBooks();
+    }
+  }, [state.year, isOpen, isChanged, state.auth_token]);
 
   const getBooks = async () => {
     const year = state.year;
