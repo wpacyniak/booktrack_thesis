@@ -1,7 +1,6 @@
 from backend import db
 from backend.db_models.Book import Book
 from backend.controllers.session import user_session
-from backend import db
 from bson.objectid import ObjectId
 from datetime import datetime
 
