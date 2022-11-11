@@ -28,24 +28,16 @@ import { ModalPages } from "../../components/modalPages/ModalPages";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "../../resources/react-circular-progress-bar-styles.css";
 import { colors } from "../../resources/constants";
-import { useEffect } from "react";
 
 const user = {
   yearlyGoal: 12,
   yearlyProgress: 10,
 };
 
-const currentlyReading = {
-  name: "The Love Hypothesis",
-  author: "Ali Hazelwood",
-  cover:
-    "https://s.lubimyczytac.pl/upload/books/5024000/5024957/998409-352x500.jpg",
-  pages: 416,
-  progress: 20,
-};
-
 export const Home = () => {
   const [bookProgress, setBookProgress] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [currentlyReading, setCurrentlyReading] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const { state, dispatch } = useStore();
 
@@ -61,10 +53,8 @@ export const Home = () => {
       });
     } else {
       getYearsList();
+      getCurrentlyReading();
     }
-    setBookProgress(
-      Math.round((currentlyReading.progress * 100) / currentlyReading.pages, 2)
-    );
   }, [state.user, state.token]);
 
   async function getYearsList() {
@@ -85,6 +75,32 @@ export const Home = () => {
     const value = new Date().getFullYear();
     dispatch({ type: "SET_YEARS_LIST", payload: [value] });
     localStorage.setItem("years_list", JSON.stringify([value]));
+  }
+
+  function handleSetProgress(valueDB) {
+    if (valueDB) {
+      setProgress(valueDB);
+      setBookProgress(Math.round((valueDB * 100) / currentlyReading.pages, 2));
+    } else {
+      setProgress(0);
+    }
+  }
+
+  async function getCurrentlyReading() {
+    const res = await fetch("http://localhost:5000/get_currently_reading", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "GET",
+    });
+
+    if (res.status === 200) {
+      const data = await res.json();
+      setCurrentlyReading(data.book);
+      handleSetProgress(data.progress);
+      return;
+    }
   }
 
   function addReadBook() {
@@ -127,7 +143,7 @@ export const Home = () => {
           <Title>{currentlyReading.name}</Title>
           <Author>{currentlyReading.author}</Author>
           <Pages>
-            {currentlyReading.progress} / {currentlyReading.pages} stron
+            {progress} / {currentlyReading.pages} stron
           </Pages>
           <ProgressWrapper>
             <ProgressBar>
@@ -140,7 +156,9 @@ export const Home = () => {
             </BookButton>
             <ModalPages
               isOpen={isOpen}
-              pages={currentlyReading.progress}
+              progress={progress}
+              pages={currentlyReading.pages}
+              setProgress={handleSetProgress}
               setIsOpen={setIsOpen}
             />
           </ProgressWrapper>

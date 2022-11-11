@@ -12,8 +12,8 @@ def add_currently_reading(book_id):
 
 def get_currently_reading_book():
     db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
-    book_id = db_user['currently_reading']
-    progress = db_user['progress']
+    book_id = db_user.get('currently_reading', None)
+    progress = db_user.get('progress', None)
     book = {}
     if book_id:
         book_db = db["books"].find_one({"_id": ObjectId(book_id)})
@@ -27,5 +27,5 @@ def get_currently_reading_book():
 
 def save_book_progress(progress):
     db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
-    db_user['progress'] = ObjectId(progress)
+    db_user['progress'] = progress
     db["users"].replace_one({"_id": ObjectId(user_session.user_id)}, db_user)

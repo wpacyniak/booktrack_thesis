@@ -41,6 +41,24 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
       setIsChanged(!isChanged);
     }
   }
+
+  async function handleCurrentlyReading() {
+    const id = book.id;
+    const res = await fetch("http://localhost:5000/add_currently_reading", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify(id),
+    });
+
+    if (res.status === 200) {
+      setIsChanged(!isChanged);
+      return;
+    }
+    console.log("Nie udało się dodać obecnie czytanej książki!");
+  }
   return (
     <Wrapper>
       <DeleteButton onClick={() => deleteBook(book.id)}>
@@ -71,7 +89,7 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
       {type === "plan" && (
         <ButtonsWrapper>
           <Button onClick={handleReadButton}>Przeczytane</Button>
-          <Button>Obecnie czytam</Button>
+          <Button onClick={handleCurrentlyReading}>Obecnie czytam</Button>
           <Form isOpen={isOpen} setIsOpen={setIsOpen} type="read" book={book} />
         </ButtonsWrapper>
       )}

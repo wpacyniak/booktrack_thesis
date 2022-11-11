@@ -72,4 +72,10 @@ const Wrapper = styled.div`
   gap: 20px;
 `;
 
-export { CloseButton, Text, Input, Button, Wrapper };
+const ErrorText = styled.p`
+  color: ${colors.violet_dark};
+  font-weight: 900;
+  text-transform: uppercase;
+`;
+
+export { CloseButton, Text, Input, Button, Wrapper, ErrorText };
