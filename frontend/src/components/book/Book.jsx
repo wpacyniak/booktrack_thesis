@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Wrapper,
   Cover,
@@ -11,19 +11,26 @@ import {
   EditButton,
   ButtonsWrapper,
   AuthorWrapper,
+  CurrentlyReadingBadge,
 } from "./styles";
 import { Form } from "../../components/form/Form";
 import { useNavigate } from "react-router-dom";
 import { FaRegStar } from "react-icons/fa";
 import { useStore } from "../../Store";
 import { FiEdit } from "react-icons/fi";
+import { GiBookmarklet } from "react-icons/gi";
 import { RiDeleteBin7Line } from "react-icons/ri";
 
 export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
   const { state } = useStore();
   const [isOpen, setIsOpen] = useState(false);
   const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [currentlyReading, setCurrentlyReading] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setCurrentlyReading(JSON.parse(localStorage.getItem("currently_reading")));
+  }, [isChanged]);
 
   function handleClick() {
     if (type === "read") {
@@ -55,10 +62,12 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
 
     if (res.status === 200) {
       setIsChanged(!isChanged);
+      localStorage.setItem("currently_reading", JSON.stringify(book.id));
       return;
     }
     console.log("Nie udało się dodać obecnie czytanej książki!");
   }
+
   return (
     <Wrapper>
       <DeleteButton onClick={() => deleteBook(book.id)}>
@@ -67,6 +76,11 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
       <EditButton onClick={() => setIsModalEditOpen(!isModalEditOpen)}>
         Edytuj <FiEdit />
       </EditButton>
+      {currentlyReading == book.id && (
+        <CurrentlyReadingBadge>
+          <GiBookmarklet /> Teraz Czytam
+        </CurrentlyReadingBadge>
+      )}
       <Cover src={book.cover} alt="cover" type={type} onClick={handleClick} />
       <TitleWrapper>
         <Title>{book.title}</Title>

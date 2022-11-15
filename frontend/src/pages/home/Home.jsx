@@ -77,10 +77,10 @@ export const Home = () => {
     localStorage.setItem("years_list", JSON.stringify([value]));
   }
 
-  function handleSetProgress(valueDB) {
-    if (valueDB) {
+  function handleSetProgress(valueDB, pages) {
+    if (valueDB && pages) {
       setProgress(valueDB);
-      setBookProgress(Math.round((valueDB * 100) / currentlyReading.pages, 2));
+      setBookProgress(Math.round((valueDB * 100) / pages, 2));
     } else {
       setProgress(0);
     }
@@ -98,7 +98,8 @@ export const Home = () => {
     if (res.status === 200) {
       const data = await res.json();
       setCurrentlyReading(data.book);
-      handleSetProgress(data.progress);
+      localStorage.setItem("currently_reading", JSON.stringify(data.book.id));
+      handleSetProgress(data.progress, data.book.pages);
       return;
     }
   }

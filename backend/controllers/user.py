@@ -7,6 +7,7 @@ from bson.objectid import ObjectId
 def add_currently_reading(book_id):
     db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
     db_user['currently_reading'] = ObjectId(book_id)
+    db_user['progress'] = 0
     db["users"].replace_one({"_id": ObjectId(user_session.user_id)}, db_user)
 
 

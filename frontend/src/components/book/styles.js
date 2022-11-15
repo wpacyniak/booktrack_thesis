@@ -111,7 +111,7 @@ const DeleteButton = styled.div`
   color: ${colors.white};
   text-transform: uppercase;
   background-color: ${colors.violet_dark};
-  padding: 5px 20px;
+  padding: 5px 10px 5px 20px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -130,7 +130,7 @@ const EditButton = styled.div`
   color: ${colors.white};
   text-transform: uppercase;
   background-color: ${colors.violet_dark};
-  padding: 5px 20px;
+  padding: 5px 10px 5px 20px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -141,8 +141,28 @@ const EditButton = styled.div`
   }
 `;
 
+const CurrentlyReadingBadge = styled.div`
+  position: absolute;
+  top: 10px;
+  right: -155px;
+  border-radius: 15px;
+  color: ${colors.white};
+  text-transform: uppercase;
+  background-color: ${colors.violet_light};
+  padding: 5px 20px 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  &:hover {
+    cursor: pointer;
+    right: -10px;
+    background-color: ${colors.violet_light};
+  }
+`;
+
 export {
   Wrapper,
+  CurrentlyReadingBadge,
   Title,
   Author,
   Cover,

@@ -56,7 +56,7 @@ export const ModalPages = ({
       });
 
       if (res.status === 200) {
-        setProgress(value);
+        setProgress(value, pages);
         setIsOpen(!isOpen);
         return;
       }

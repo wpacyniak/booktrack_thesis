@@ -91,7 +91,7 @@ const ProgressBar = styled.div`
 `;
 const Progress = styled.div`
   height: 30px;
-  width: ${(props) => `${props.width * 3}px`};
+  width: ${(props) => (props.width === 0 ? "0px" : `${props.width * 3}px`)};
   background-color: ${colors.pink_dark};
   border-radius: 15px 0px 0px 15px;
 `;
