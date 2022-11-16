@@ -64,7 +64,6 @@ export const Header = () => {
             <Option onClick={() => handleClickYear("all")}>∞</Option>
           </OptionsWrapper>
         </ListWrapper>
-        <Button onClick={() => console.log("click")}>WishList</Button>
         <Button onClick={handlePlan}>Plany</Button>
       </ButtonsWrapper>
     </Wrapper>

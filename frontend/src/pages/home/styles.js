@@ -9,42 +9,11 @@ const Wrapper = styled.div`
   color: ${colors.violet_dark};
 `;
 
-const GoalWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  margin-top: 20px;
-`;
-
-const TextWrapper = styled.div`
-  margin-top: 20px;
-  text-align: center;
-`;
-
 const Welcome = styled.h2`
   text-align: center;
   font-weight: 400;
   font-family: "DM Sans";
   font-style: normal;
-`;
-
-const Goal = styled.h2`
-  font-family: "DM Sans";
-  font-style: normal;
-  font-size: 20px;
-  text-transform: uppercase;
-`;
-
-const GoalSubText = styled.h3`
-  margin-top: 18px;
-  font-family: "DM Sans";
-  font-style: normal;
-  font-size: 18px;
-  font-weight: 400;
-`;
-
-const WrapperBar = styled.div`
-  width: 120px;
 `;
 
 const Text = styled.h2`
@@ -151,17 +120,12 @@ export {
   Pages,
   Title,
   Welcome,
-  WrapperBar,
-  Goal,
   Text,
   ProgressBar,
   Progress,
   ProgressText,
   InfoWrapper,
   BookWrapper,
-  GoalSubText,
-  TextWrapper,
-  GoalWrapper,
   Author,
   Cover,
 };
