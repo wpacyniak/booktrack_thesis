@@ -47,12 +47,16 @@ export const Header = () => {
     navigate("/planBooks");
   }
 
+  function handleProfil() {
+    navigate("/profil");
+  }
+
   return (
     <Wrapper>
       <Logo src={require("../../resources/images/logo.png")} alt="logo" />
       <ButtonsWrapper>
         <Button onClick={handleHome}>Home</Button>
-        <Button onClick={() => console.log("click")}>Profil</Button>
+        <Button onClick={() => handleProfil()}>Profil</Button>
         <ListWrapper>
           <Button onClick={handleList}>Lista</Button>
           <OptionsWrapper isExpanded={isExpanded}>

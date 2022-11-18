@@ -7,6 +7,7 @@ import { Home } from "./pages/home/Home";
 import { PlanBookList } from "./pages/planBookList/PlanBookList";
 import { ReadBookList } from "./pages/readBookList/ReadBookList";
 import { Book } from "./pages/book/Book";
+import { Profil } from "./pages/profil/Profil";
 import { Store } from "./Store";
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/readBooks" element={<ReadBookList />} />
           <Route path="/planBooks" element={<PlanBookList />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/profil" element={<Profil />} />
         </Routes>
       </Store>
     </div>
