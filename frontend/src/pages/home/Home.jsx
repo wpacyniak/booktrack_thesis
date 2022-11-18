@@ -29,6 +29,7 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { state, dispatch } = useStore();
   const [goals, setGoals] = useState([]);
+  const [isChanged, setIsChanged] = useState(false);
 
   useEffect(() => {
     if (!state.user || !state.auth_token) {
@@ -45,7 +46,7 @@ export const Home = () => {
       getCurrentlyReading();
       getGoals();
     }
-  }, [state.user, state.token]);
+  }, [state.user, state.token, isChanged]);
 
   async function getYearsList() {
     const res = await fetch("http://localhost:5000/get_years", {
@@ -105,8 +106,7 @@ export const Home = () => {
 
     if (res.status === 200) {
       const data = await res.json();
-      setGoals(data.goals);
-      console.log(data);
+      setGoals(data);
       return;
     }
   }
@@ -119,7 +119,11 @@ export const Home = () => {
     <Wrapper>
       <Header />
       <Welcome>Cześć, {state.user?.username}!</Welcome>
-      <GoalsList goals={goals} />
+      <GoalsList
+        goals={goals}
+        setIsChanged={setIsChanged}
+        isChanged={isChanged}
+      />
       {currentlyReading ? (
         <>
           <Text>Obecnie czytam:</Text>
@@ -163,7 +167,6 @@ export const Home = () => {
           </Welcome>
         </>
       )}
-
       <Footer />
     </Wrapper>
   );

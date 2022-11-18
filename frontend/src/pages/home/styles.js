@@ -4,9 +4,18 @@ import { colors } from "../../resources/constants";
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 800px;
-  height: 100vh;
+  height: calc(100vh - 50px);
   background-color: ${colors.white};
   color: ${colors.violet_dark};
+  overflow-y: scroll;
+  box-sizing: border-box;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; //Safari and Chrome
+  }
 `;
 
 const Welcome = styled.h2`
@@ -22,6 +31,8 @@ const Text = styled.h2`
   font-style: normal;
   font-size: 20px;
   text-transform: uppercase;
+  margin-top: 40px;
+  letter-spacing: 3px;
 `;
 
 const Cover = styled.img`
@@ -33,6 +44,7 @@ const Cover = styled.img`
 const BookWrapper = styled.div`
   display: flex;
   margin-top: 15px;
+  margin-bottom: 30px;
 `;
 
 const InfoWrapper = styled.div`

@@ -21,5 +21,4 @@ class Goal():
 
     def to_bson(self, user_id):
         return {'user_id': ObjectId(user_id), 'goal': self.goal, 'type': self.type,
-                'start_date': datetime.strftime(self.start_date, "%d %b %Y"),
-                'end_date': datetime.strftime(self.end_date, "%d %b %Y")}
+                'start_date': self.start_date, 'end_date': self.end_date}

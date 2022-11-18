@@ -11,8 +11,8 @@ def add_goal(goal, type, start_date, end_date):
         start_date + "T00:00:00+00:00", '%Y-%m-%dT%H:%M:%S%z')
     db_end_date = datetime.strptime(
         end_date + "T00:00:00+00:00", '%Y-%m-%dT%H:%M:%S%z')
-    goal = Goal(None, int(goal), type, db_start_date, db_end_date)
-    db["goals"].insert_one(goal.to_bson(user_session.user_id))
+    db_goal = Goal(None, int(goal), type, db_start_date, db_end_date, 0, 0)
+    db["goals"].insert_one(db_goal.to_bson(user_session.user_id))
 
 
 def get_books():
@@ -43,10 +43,11 @@ def get_goals():
     goals = []
     if db_goals is not None:
         for goal in db_goals:
-            time_left = (goal["end_date"] - goal["start_date"]).days
-            goal = Goal(str(goal["_id"]), goal["goal"],
-                        goal["type"], goal["start_date"],
-                        goal["end_date"], 0, time_left)
+            time_left = (goal["end_date"] - datetime.now()).days + 1
+            temp_goal = Goal(str(goal["_id"]), goal["goal"],
+                             goal["type"], goal["start_date"],
+                             goal["end_date"], 0, time_left)
+            goals.append(temp_goal)
     books = get_books()
 
     progresses = [0] * len(goals)
@@ -54,7 +55,10 @@ def get_goals():
         for book in books:
             for index, goal in enumerate(goals):
                 if goal.start_date <= book.read_date <= goal.end_date:
-                    progresses[index] += 1
+                    if goal.type == "books":
+                        progresses[index] += 1
+                    else:
+                        progresses[index] += book.pages
         for index, goal in enumerate(goals):
             goal.progress = progresses[index]
 

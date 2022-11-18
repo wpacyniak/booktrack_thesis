@@ -12,8 +12,8 @@ def save_goal():
         data = request.json
         goal = data["goal"]
         type = data["type"]
-        start_date = data["start_date"]
-        end_date = data["end_date"]
+        start_date = data["start"]
+        end_date = data["end"]
         add_goal(goal, type, start_date, end_date)
     except Exception as e:
         return e.args[0], 400
@@ -34,8 +34,9 @@ def get_all_goals():
 @jwt_required()
 def remove_goal():
     try:
-        goald_id = request.json
-        delete_goal(goald_id)
+        data = request.json
+        goal_id = data['id']
+        delete_goal(goal_id)
     except Exception as e:
         return e.args[0], 400
     return Response(status=200)
