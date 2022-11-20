@@ -114,3 +114,30 @@ def get_years():
             years.append(year)
     sorted_years = sorted(years)
     return sorted_years
+
+
+def get_statistics():
+    db_books = db["books"].find(
+        {"user_id": ObjectId(user_session.user_id), "is_read": True})
+    statistics = {}
+    if db_books is not None:
+        for book in db_books:
+            if "quote" in book.keys():
+                db_book = Book(str(book["_id"]), book["author"],
+                               book["title"], book["note"],
+                               book["pages"], book["quote"],
+                               book["rate"], book["read_date"],
+                               book["cover"])
+            else:
+                db_book = Book(str(book["_id"]), book["author"],
+                               book["title"], book["note"],
+                               book["pages"], "",
+                               book["rate"], book["read_date"],
+                               book["cover"])
+            if db_book.read_date.year not in statistics.keys():
+                statistics[db_book.read_date.year] = {
+                    "pages": db_book.pages, "books": 1}
+            else:
+                statistics[db_book.read_date.year]["pages"] += db_book.pages
+                statistics[db_book.read_date.year]["books"] += 1
+    return statistics

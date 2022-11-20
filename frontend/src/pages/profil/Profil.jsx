@@ -34,9 +34,25 @@ export const Profil = () => {
         payload: JSON.parse(localStorage.getItem("token")),
       });
     } else {
+      getStatictics();
       //   pobranie danych o przeczytanych ksiazkach + stronach
     }
   }, [state.user, state.token]);
+
+  async function getStatictics() {
+    const res = await fetch("http://localhost:5000/get_statistics", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.auth_token}`,
+      },
+      method: "GET",
+    });
+
+    if (res.status == 200) {
+      const statictics = await res.json();
+      console.log(statictics);
+    }
+  }
 
   return (
     <Wrapper>
