@@ -111,45 +111,51 @@ export const GoalsList = ({ goals, isChanged, setIsChanged }) => {
     <Wrapper>
       {goals && <Goal>Cele czytelnicze:</Goal>}
       <GoalsWrapper>
-        {goals.length > 0 ? (
-          goals.map((goalItem) => (
-            <GoalWrapper key={goalItem.id}>
-              <TextWrapper>
-                <Goal>
-                  {goalItem.progress}/{goalItem.goal}{" "}
-                  {goalItem.type == "books" ? " książek" : " stron"}
-                </Goal>
-                <SubText>START: {getDate(goalItem.startDate)}</SubText>
-                <SubText>KONIEC: {getDate(goalItem.endDate)}</SubText>
-                <SubText>Pozostało {goalItem.timeLeft} dni</SubText>
-              </TextWrapper>
-              <WrapperBar>
-                <CircularProgressbar
-                  value={
-                    goalItem.progress > goalItem.goal
-                      ? 100
-                      : (goalItem.progress * 100) / goalItem.goal
-                  }
-                  text={`${Math.round(
-                    (goalItem.progress * 100) / goalItem.goal,
-                    2
-                  )}%`}
-                  styles={buildStyles({
-                    pathColor: colors.pink_dark,
-                    textColor: colors.violet_dark,
-                  })}
-                />
-              </WrapperBar>
-              <ButtonWrapper>
-                <DeleteButton onClick={() => deleteGoal(goalItem.id)}>
-                  Usuń
-                </DeleteButton>
-              </ButtonWrapper>
-            </GoalWrapper>
-          ))
-        ) : (
-          <Goal>Brak celu czytelniczego...</Goal>
-        )}
+        <tbody>
+          {goals.length > 0 ? (
+            goals.map((goalItem) => (
+              <GoalWrapper key={goalItem.id}>
+                <TextWrapper>
+                  <Goal>
+                    {goalItem.progress}/{goalItem.goal}{" "}
+                    {goalItem.type == "books" ? " książek" : " stron"}
+                  </Goal>
+                  <SubText>START: {getDate(goalItem.startDate)}</SubText>
+                  <SubText>KONIEC: {getDate(goalItem.endDate)}</SubText>
+                  <SubText>Pozostało {goalItem.timeLeft} dni</SubText>
+                </TextWrapper>
+                <WrapperBar>
+                  <CircularProgressbar
+                    value={
+                      goalItem.progress > goalItem.goal
+                        ? 100
+                        : (goalItem.progress * 100) / goalItem.goal
+                    }
+                    text={`${Math.round(
+                      (goalItem.progress * 100) / goalItem.goal,
+                      2
+                    )}%`}
+                    styles={buildStyles({
+                      pathColor: colors.pink_dark,
+                      textColor: colors.violet_dark,
+                    })}
+                  />
+                </WrapperBar>
+                <ButtonWrapper>
+                  <DeleteButton onClick={() => deleteGoal(goalItem.id)}>
+                    Usuń
+                  </DeleteButton>
+                </ButtonWrapper>
+              </GoalWrapper>
+            ))
+          ) : (
+            <tr>
+              <td>
+                <Goal>Brak celu czytelniczego...</Goal>
+              </td>
+            </tr>
+          )}
+        </tbody>
       </GoalsWrapper>
       <AddButton onClick={() => handleSetIsExpand(!isExpand)}>
         {isExpand ? "Anuluj" : "Dodaj cel!"}
