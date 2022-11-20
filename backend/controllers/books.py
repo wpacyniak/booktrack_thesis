@@ -136,8 +136,15 @@ def get_statistics():
                                book["cover"])
             if db_book.read_date.year not in statistics.keys():
                 statistics[db_book.read_date.year] = {
-                    "pages": db_book.pages, "books": 1}
+                    "pages": db_book.pages, "books": 1, "months": {}}
             else:
                 statistics[db_book.read_date.year]["pages"] += db_book.pages
                 statistics[db_book.read_date.year]["books"] += 1
+            month = db_book.read_date.month - 1
+            if month not in statistics[db_book.read_date.year]["months"].keys():
+                statistics[db_book.read_date.year]["months"][month] = {
+                    "pages": db_book.pages, "books": 1}
+            else:
+                statistics[db_book.read_date.year]["months"][month]["pages"] += db_book.pages
+                statistics[db_book.read_date.year]["months"][month]["books"] += 1
     return statistics

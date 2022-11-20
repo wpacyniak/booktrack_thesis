@@ -22,7 +22,15 @@ const Row = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
+  align-items: center;
   gap: 100px;
+`;
+
+const RowSecond = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TextWrapper = styled.div``;
@@ -56,6 +64,14 @@ const LogoLabel = styled.p`
   font-weight: 500;
 `;
 
+const GraphPagesTitle = styled.p`
+  font-family: "DM Sans";
+  font-style: normal;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 500;
+`;
+
 const Number = styled.p`
   position: absolute;
   top: 50%;
@@ -72,20 +88,62 @@ const FullLogoWrapper = styled.div`
   align-items: center;
 `;
 
-const AmountText = styled.p`
-  margin-top: 80px;
-  font-size: 18px;
-  width: 240px;
-  font-family: "DM Sans";
-  font-style: normal;
+const ListWrapper = styled.div`
+  position: relative;
+  z-index: 1;
 `;
 
+const OptionsWrapper = styled.div`
+  position: absolute;
+  visibility: ${(props) => (props.isExpanded ? "visible" : "hidden")};
+  background-color: ${colors.white};
+  border: 2px solid ${colors.violet_dark};
+  border-top: none;
+  width: 100%;
+`;
+
+const Option = styled.p`
+  text-align: center;
+  border-top: 2px solid ${colors.violet_dark};
+  font-weight: bold;
+  padding 10px 0;
+  font-size: 20px;
+
+  &:hover {
+    color: ${colors.white};
+    background-color: ${colors.violet_dark};
+    cursor: pointer;
+  }
+`;
+
+const SignOutButton = styled.button`
+  margin-top: 20px;
+  color: ${colors.white};
+  background-color: ${colors.violet_dark};
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  font-size: 17px;
+  text-transform: uppercase;
+  font-family: "DM Sans";
+  font-style: normal;
+
+  &:hover {
+    background-color: ${colors.violet_hover};
+    cursor: pointer;
+  }
+`;
 export {
   Wrapper,
+  SignOutButton,
   Email,
-  AmountText,
+  GraphPagesTitle,
+  OptionsWrapper,
+  Option,
+  ListWrapper,
   FullLogoWrapper,
   TextWrapper,
+  RowSecond,
   LogoLabel,
   Login,
   Number,
