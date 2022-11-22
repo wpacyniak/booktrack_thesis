@@ -50,9 +50,7 @@ export const PlanBookList = () => {
 
   const handleIsOpen = (value) => {
     setIsOpen(value);
-    if (value == false) {
-      setIsChanged(!isChanged);
-    }
+    setIsChanged(!isChanged);
   };
 
   async function deleteBook(bookId) {
@@ -91,7 +89,7 @@ export const PlanBookList = () => {
                 type={type}
                 deleteBook={deleteBook}
                 isChanged={isChanged}
-                setIsChanged={setIsChanged}
+                setIsChanged={handleIsOpen}
               />
             );
           })}

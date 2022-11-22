@@ -96,7 +96,6 @@ export const Profil = () => {
 
     if (res.status == 200) {
       const db_statictics = await res.json();
-      console.log(db_statictics);
       setStatistics(db_statictics);
       return db_statictics;
     }

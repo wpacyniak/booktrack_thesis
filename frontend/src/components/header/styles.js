@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 
 const Logo = styled.img`
   width: 80px;
+  cursor: pointer;
 `;
 
 const ListWrapper = styled.div`

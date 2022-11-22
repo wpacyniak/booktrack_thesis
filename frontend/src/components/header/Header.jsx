@@ -51,9 +51,17 @@ export const Header = () => {
     navigate("/profil");
   }
 
+  function handleClickLogo() {
+    navigate("/home");
+  }
+
   return (
     <Wrapper>
-      <Logo src={require("../../resources/images/logo.png")} alt="logo" />
+      <Logo
+        onClick={() => handleClickLogo()}
+        src={require("../../resources/images/logo.png")}
+        alt="logo"
+      />
       <ButtonsWrapper>
         <Button onClick={handleHome}>Home</Button>
         <Button onClick={() => handleProfil()}>Profil</Button>

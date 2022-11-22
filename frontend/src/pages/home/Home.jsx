@@ -21,6 +21,7 @@ import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { ModalPages } from "../../components/modalPages/ModalPages";
 import { GoalsList } from "../../components/goalsList/GoalsList";
+import { Form } from "../../components/form/Form";
 
 export const Home = () => {
   const [bookProgress, setBookProgress] = useState(0);
@@ -30,6 +31,7 @@ export const Home = () => {
   const { state, dispatch } = useStore();
   const [goals, setGoals] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
+  const [isReadModalOpen, setIsReadModalOpen] = useState(false);
 
   useEffect(() => {
     if (!state.user || !state.auth_token) {
@@ -112,7 +114,13 @@ export const Home = () => {
   }
 
   function addReadBook() {
-    // JAK DOROBISZ OBECNIE CZYTANĄ KSIĄŻKĘ TO SIĘ TYM ZAJMIJ
+    setIsReadModalOpen(!isReadModalOpen);
+  }
+
+  function handleSetIsReadModalOpen(value) {
+    setIsReadModalOpen(value);
+    setCurrentlyReading();
+    localStorage.removeItem("currently_reading");
   }
 
   return (
@@ -128,7 +136,14 @@ export const Home = () => {
         <>
           <Text>Obecnie czytam:</Text>
           <BookWrapper>
-            <Cover src={currentlyReading.cover} alt="cover" />
+            <Cover
+              src={
+                currentlyReading.cover
+                  ? currentlyReading.cover
+                  : "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
+              }
+              alt="cover"
+            />
             <InfoWrapper>
               <Title>{currentlyReading.name}</Title>
               <Author>{currentlyReading.author}</Author>
@@ -153,8 +168,14 @@ export const Home = () => {
                 />
               </ProgressWrapper>
               <ButtonWrapper>
-                <BookButton onClik={addReadBook}>Przeczytana</BookButton>
+                <BookButton onClick={addReadBook}>Przeczytana</BookButton>
               </ButtonWrapper>
+              <Form
+                isOpen={isReadModalOpen}
+                setIsOpen={handleSetIsReadModalOpen}
+                type={"updateBook"}
+                book={currentlyReading}
+              />
             </InfoWrapper>
           </BookWrapper>
         </>
