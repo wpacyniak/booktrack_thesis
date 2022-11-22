@@ -8,8 +8,6 @@ export const Wrapper = styled.button`
   min-width: 60px;
   cursor: pointer;
   height: 40px;
-  //   font-family: "DM Sans";
-  //   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   text-transform: uppercase;

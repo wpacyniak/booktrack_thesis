@@ -1,5 +1,20 @@
 import { useState, useEffect } from "react";
-import { Wrapper, ListWrapper, Title } from "./styles";
+import {
+  Wrapper,
+  TilesWrapper,
+  Title,
+  ListWrapper,
+  ItemList,
+  Author,
+  TitleBook,
+  Date,
+  ButtonGroup,
+  ButtonLeft,
+  ButtonRight,
+  Number,
+  Rate,
+  HeaderItem,
+} from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { Book } from "../../components/book/Book";
@@ -7,9 +22,16 @@ import { AddButton } from "../../components/addButton/AddButton";
 import { Form } from "../../components/form/Form";
 import { useStore } from "../../Store";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
+import {
+  AiFillStar,
+  AiOutlineUnorderedList,
+  AiOutlineTable,
+} from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 export const ReadBookList = () => {
   const { state, dispatch } = useStore();
+  const navigate = useNavigate();
   const type = "read";
 
   const [books, setBooks] = useState([]);
@@ -17,6 +39,7 @@ export const ReadBookList = () => {
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const [isList, setIsList] = useState(false);
 
   useEffect(() => {
     if (!state.auth_token || !state.year) {
@@ -93,6 +116,18 @@ export const ReadBookList = () => {
     }
   };
 
+  function handleClickList() {
+    if (isList != true) {
+      setIsList(true);
+    }
+  }
+
+  function handleClickTable() {
+    if (isList != false) {
+      setIsList(false);
+    }
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -102,23 +137,75 @@ export const ReadBookList = () => {
           : "Wszystkie przeczytane książki:"}
       </Title>
       <ErrorModal isOpen={isModalOpen} text={text} setIsOpen={setIsModalOpen} />
-      <ListWrapper>
-        {books?.length != 0 &&
-          books.map((book, index) => {
-            return (
-              <Book
-                key={index}
-                book={book}
-                type={type}
-                deleteBook={deleteBook}
-                isChanged={isChanged}
-                setIsChanged={setIsChanged}
-              />
-            );
-          })}
-        <AddButton onClick={onClick} />
-        <Form isOpen={isOpen} setIsOpen={handleIsOpen} type={type} />
-      </ListWrapper>
+      <ButtonGroup>
+        <ButtonLeft isChosen={isList} onClick={() => handleClickList()}>
+          {isList ? (
+            <AiOutlineUnorderedList
+              style={{ color: "#fff", fontSize: "15px" }}
+            />
+          ) : (
+            <AiOutlineUnorderedList
+              style={{ color: "#2e2562", fontSize: "15px" }}
+            />
+          )}
+        </ButtonLeft>
+        <ButtonRight isChosen={!isList} onClick={() => handleClickTable()}>
+          {isList ? (
+            <AiOutlineTable style={{ color: "#2e2562", fontSize: "15px" }} />
+          ) : (
+            <AiOutlineTable style={{ color: "#fff", fontSize: "15px" }} />
+          )}
+        </ButtonRight>
+      </ButtonGroup>
+      {isList ? (
+        <ListWrapper>
+          <thead>
+            <HeaderItem>Lp.</HeaderItem>
+            <HeaderItem>Tytuł</HeaderItem>
+            <HeaderItem>Autor</HeaderItem>
+            <HeaderItem>Data przeczytania</HeaderItem>
+            <HeaderItem>Ocena</HeaderItem>
+          </thead>
+          <tbody>
+            {books?.length != 0 &&
+              books.map((book, index) => (
+                <ItemList
+                  key={index}
+                  onClick={() => navigate("/book", { state: book })}
+                >
+                  <Number>{index + 1}.</Number>
+                  <TitleBook>{book.title}</TitleBook>
+                  <Author>{book.author}</Author>
+                  <Date>{book.readDate}</Date>
+                  <Rate>
+                    {book.rate}{" "}
+                    <AiFillStar
+                      style={{ color: "#2e2562", fontSize: "15px" }}
+                    />
+                  </Rate>
+                </ItemList>
+              ))}
+          </tbody>
+        </ListWrapper>
+      ) : (
+        <TilesWrapper>
+          {books?.length != 0 &&
+            books.map((book, index) => {
+              return (
+                <Book
+                  key={index}
+                  book={book}
+                  type={type}
+                  deleteBook={deleteBook}
+                  isChanged={isChanged}
+                  setIsChanged={setIsChanged}
+                />
+              );
+            })}
+          <AddButton onClick={onClick} />
+          <Form isOpen={isOpen} setIsOpen={handleIsOpen} type={type} />
+        </TilesWrapper>
+      )}
       <Footer />
     </Wrapper>
   );
