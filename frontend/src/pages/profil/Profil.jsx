@@ -213,10 +213,14 @@ export const Profil = () => {
           <SignOutButton onClick={() => logOut()}>Wyloguj</SignOutButton>
         </TextWrapper>
       </Row>
-      <Row>
+      <RowSecond>
         <GraphPagesTitle>
-          Liczba stron przeczytana w danym miesiącu:
+          {graphYear == "all"
+            ? "Liczba stron przeczytana w danym miesiącu we wszystkich latach:"
+            : `Liczba stron przeczytana w danym miesiącu w ${graphYear} roku:`}
         </GraphPagesTitle>
+      </RowSecond>
+      <RowSecond>
         <ListWrapper>
           <Button onClick={handleList}>Wybierz rok</Button>
           <OptionsWrapper isExpanded={isExpanded}>
@@ -228,7 +232,7 @@ export const Profil = () => {
             <Option onClick={() => handleClickYear("all")}>∞</Option>
           </OptionsWrapper>
         </ListWrapper>
-      </Row>
+      </RowSecond>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart
           width={500}
