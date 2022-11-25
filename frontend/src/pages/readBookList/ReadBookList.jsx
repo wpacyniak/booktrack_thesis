@@ -160,11 +160,13 @@ export const ReadBookList = () => {
       {isList ? (
         <ListWrapper>
           <thead>
-            <HeaderItem>Lp.</HeaderItem>
-            <HeaderItem>Tytuł</HeaderItem>
-            <HeaderItem>Autor</HeaderItem>
-            <HeaderItem>Data przeczytania</HeaderItem>
-            <HeaderItem>Ocena</HeaderItem>
+            <tr>
+              <HeaderItem>Lp.</HeaderItem>
+              <HeaderItem>Tytuł</HeaderItem>
+              <HeaderItem>Autor</HeaderItem>
+              <HeaderItem>Data przeczytania</HeaderItem>
+              <HeaderItem>Ocena</HeaderItem>
+            </tr>
           </thead>
           <tbody>
             {books?.length != 0 &&

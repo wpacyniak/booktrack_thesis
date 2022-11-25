@@ -227,7 +227,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
             onChange={(e) => onChangeCover(e.target.value)}
             type="text"
           />
-          {type == "read" ? (
+          {type == "read" || type == "updateBook" ? (
             <Input
               label="Cytat"
               value={quote}

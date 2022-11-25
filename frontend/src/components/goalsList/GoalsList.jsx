@@ -31,7 +31,7 @@ export const GoalsList = ({ goals, isChanged, setIsChanged }) => {
   const { state } = useStore();
 
   const [isExpand, setIsExpand] = useState(false);
-  const [goal, setGoal] = useState();
+  const [goal, setGoal] = useState(0);
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [type, setType] = useState("");

@@ -77,7 +77,7 @@ export const PlanBookList = () => {
   return (
     <Wrapper>
       <Header />
-      <Title>Plany czytelnicze</Title>
+      <Title>Plany czytelnicze:</Title>
       <ErrorModal isOpen={isModalOpen} text={text} setIsOpen={setIsModalOpen} />
       <ListWrapper>
         {plans?.length != 0 &&
@@ -89,7 +89,7 @@ export const PlanBookList = () => {
                 type={type}
                 deleteBook={deleteBook}
                 isChanged={isChanged}
-                setIsChanged={handleIsOpen}
+                setIsChanged={setIsChanged}
               />
             );
           })}
