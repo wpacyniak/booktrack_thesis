@@ -130,7 +130,7 @@ export const Home = () => {
 
       if (res.status === 200) {
         setCurrentlyReading();
-        localStorage.removeItem("currently_reading");
+        localStorage.setItem("currently_reading", JSON.stringify(0));
         return;
       }
     }

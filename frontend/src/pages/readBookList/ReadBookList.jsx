@@ -9,6 +9,8 @@ import {
   TitleBook,
   Date,
   ButtonGroup,
+  Row,
+  Search,
   ButtonLeft,
   ButtonRight,
   Number,
@@ -40,6 +42,11 @@ export const ReadBookList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
   const [isList, setIsList] = useState(false);
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search);
+  const [searchQuery, setSearchQuery] = useState(query || "");
+  const filteredBooks = filterBooks(books, searchQuery);
 
   useEffect(() => {
     if (!state.auth_token || !state.year) {
@@ -128,6 +135,18 @@ export const ReadBookList = () => {
     }
   }
 
+  function filterBooks(booksList, query) {
+    if (!query) {
+      return booksList;
+    }
+
+    return booksList.filter((boook) => {
+      const titleName = boook.title.toLowerCase();
+      const authorName = boook.author.toLowerCase();
+      return titleName.includes(query) || authorName.includes(query);
+    });
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -137,26 +156,34 @@ export const ReadBookList = () => {
           : "Wszystkie przeczytane książki:"}
       </Title>
       <ErrorModal isOpen={isModalOpen} text={text} setIsOpen={setIsModalOpen} />
-      <ButtonGroup>
-        <ButtonLeft isChosen={isList} onClick={() => handleClickList()}>
-          {isList ? (
-            <AiOutlineUnorderedList
-              style={{ color: "#fff", fontSize: "15px" }}
-            />
-          ) : (
-            <AiOutlineUnorderedList
-              style={{ color: "#2e2562", fontSize: "15px" }}
-            />
-          )}
-        </ButtonLeft>
-        <ButtonRight isChosen={!isList} onClick={() => handleClickTable()}>
-          {isList ? (
-            <AiOutlineTable style={{ color: "#2e2562", fontSize: "15px" }} />
-          ) : (
-            <AiOutlineTable style={{ color: "#fff", fontSize: "15px" }} />
-          )}
-        </ButtonRight>
-      </ButtonGroup>
+      <Row>
+        <Search
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          type="text"
+          placeholder="Szukaj..."
+        />
+        <ButtonGroup>
+          <ButtonLeft isChosen={isList} onClick={() => handleClickList()}>
+            {isList ? (
+              <AiOutlineUnorderedList
+                style={{ color: "#fff", fontSize: "15px" }}
+              />
+            ) : (
+              <AiOutlineUnorderedList
+                style={{ color: "#2e2562", fontSize: "15px" }}
+              />
+            )}
+          </ButtonLeft>
+          <ButtonRight isChosen={!isList} onClick={() => handleClickTable()}>
+            {isList ? (
+              <AiOutlineTable style={{ color: "#2e2562", fontSize: "15px" }} />
+            ) : (
+              <AiOutlineTable style={{ color: "#fff", fontSize: "15px" }} />
+            )}
+          </ButtonRight>
+        </ButtonGroup>
+      </Row>
       {isList ? (
         <ListWrapper>
           <thead>
@@ -169,8 +196,8 @@ export const ReadBookList = () => {
             </tr>
           </thead>
           <tbody>
-            {books?.length != 0 &&
-              books.map((book, index) => (
+            {filteredBooks?.length != 0 &&
+              filteredBooks.map((book, index) => (
                 <ItemList
                   key={index}
                   onClick={() => navigate("/book", { state: book })}
@@ -191,8 +218,8 @@ export const ReadBookList = () => {
         </ListWrapper>
       ) : (
         <TilesWrapper>
-          {books?.length != 0 &&
-            books.map((book, index) => {
+          {filteredBooks?.length != 0 &&
+            filteredBooks.map((book, index) => {
               return (
                 <Book
                   key={index}

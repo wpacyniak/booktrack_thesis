@@ -79,10 +79,8 @@ const Number = styled.td`
 `;
 
 const ButtonGroup = styled.div`
-  width: 95%;
   display: flex;
   justify-content: right;
-  margin-bottom: 20px;
 `;
 const ButtonLeft = styled.button`
   border-radius: 10px 0px 0px 10px;
@@ -117,8 +115,35 @@ const ButtonRight = styled.button`
   }
 `;
 
+const Row = styled.div`
+  width: 95%;
+  display: flex;
+  gap: 40px;
+  justify-content: right;
+  margin-bottom: 20px;
+`;
+
+const Search = styled.input`
+  width: 200px;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  border: 1px solid ${colors.violet_light};
+  color: ${colors.violet_dark};
+  font-family: "DM Sans";
+  font-style: normal;
+  padding: 0 10px;
+  font-size: 18px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 export {
   Wrapper,
+  Row,
+  Search,
   TilesWrapper,
   ButtonGroup,
   ButtonLeft,
