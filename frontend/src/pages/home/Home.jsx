@@ -117,10 +117,23 @@ export const Home = () => {
     setIsReadModalOpen(!isReadModalOpen);
   }
 
-  function handleSetIsReadModalOpen(value) {
+  async function handleSetIsReadModalOpen(value) {
     setIsReadModalOpen(value);
-    setCurrentlyReading();
-    localStorage.removeItem("currently_reading");
+    if (value === false) {
+      const res = await fetch("http://localhost:5000/clear_currently_reading", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${state.auth_token}`,
+        },
+        method: "PUT",
+      });
+
+      if (res.status === 200) {
+        setCurrentlyReading();
+        localStorage.removeItem("currently_reading");
+        return;
+      }
+    }
   }
 
   return (

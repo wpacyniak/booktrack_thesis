@@ -2,7 +2,7 @@ from backend import app
 from flask import request, Response, jsonify
 from flask_jwt_extended import jwt_required
 
-from backend.controllers.user import add_currently_reading, get_currently_reading_book, save_book_progress
+from backend.controllers.user import add_currently_reading, get_currently_reading_book, save_book_progress, clear_currently_reading_book
 
 
 @app.route("/add_currently_reading", methods=['PUT'])
@@ -24,6 +24,16 @@ def get_currently_reading():
         return Response(status=400)
     else:
         return jsonify(book)
+
+
+@app.route("/clear_currently_reading", methods=['PUT'])
+@jwt_required()
+def remove_currently_reading():
+    try:
+        clear_currently_reading_book()
+        return Response(status=400)
+    except Exception as e:
+        return e.args[0], 400
 
 
 @app.route("/save_progress", methods=['PUT'])

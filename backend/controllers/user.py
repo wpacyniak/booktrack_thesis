@@ -30,3 +30,10 @@ def save_book_progress(progress):
     db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
     db_user['progress'] = progress
     db["users"].replace_one({"_id": ObjectId(user_session.user_id)}, db_user)
+
+
+def clear_currently_reading_book():
+    db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
+    db_user['progress'] = 0
+    db_user['currently_reading'] = 0
+    db["users"].replace_one({"_id": ObjectId(user_session.user_id)}, db_user)
