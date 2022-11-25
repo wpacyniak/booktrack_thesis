@@ -98,8 +98,8 @@ def get_list_years():
 @app.route('/get_statistics', methods=['GET'])
 @jwt_required()
 def get_profile_data():
-    statistics = get_statistics()
+    statistics, biggest_book = get_statistics()
     if statistics:
-        return jsonify(statistics)
+        return jsonify({"biggestBook": biggest_book, "statistics": statistics})
     else:
         return Response(status=400)

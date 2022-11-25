@@ -8,11 +8,14 @@ import {
   Logo,
   FullLogoWrapper,
   LogoLabel,
+  RowColumn,
   RowSecond,
   LogoWrapper,
   Row,
   ListWrapper,
   GraphPagesTitle,
+  VariableText,
+  ConstText,
   OptionsWrapper,
   Option,
   TextWrapper,
@@ -45,7 +48,11 @@ export const Profil = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [graphYear, setGraphYear] = useState(currentYear);
   const [years, setYears] = useState([]);
-  const [allBooks, setAllBooks] = useState();
+  const [allBooks, setAllBooks] = useState(0);
+  const [avgBooksPerYear, setAvgBooksPerYear] = useState(0);
+  const [biggestBook, setBiggestBook] = useState(0);
+  const [biggestYear, setBiggestYear] = useState(0);
+  const [avgPagesMonth, setAvgPagesMonth] = useState(0);
 
   useEffect(() => {
     if (!state.user || !state.auth_token) {
@@ -71,8 +78,22 @@ export const Profil = () => {
     if (statistics) {
       setAllBooks(getAllBooks());
       setGraphBooks(getBooksYears());
+      setAvgBooksPerYear(Math.round(allBooks / years.length));
+      setAvgPagesMonth(prepareAvgPagesMonth());
     }
   }, [graphYear, statistics]);
+
+  function prepareAvgPagesMonth() {
+    allPages = 0;
+    avgPages = 0;
+    if (statistics) {
+      for (month in statistics[currentYear]["months"]) {
+        allPages += statistics[currentYear]["months"][month]["pages"];
+      }
+      avgPages = Math.round(allPages / 12);
+    }
+    return avgPages;
+  }
 
   useEffect(() => {
     if (!state.yearsList) {
@@ -95,9 +116,10 @@ export const Profil = () => {
     });
 
     if (res.status == 200) {
-      const db_statictics = await res.json();
-      setStatistics(db_statictics);
-      return db_statictics;
+      const data = await res.json();
+      setStatistics(data.statistics);
+      setBiggestBook(data.biggestBook);
+      return data.statistics;
     }
   }
 
@@ -152,10 +174,15 @@ export const Profil = () => {
 
   function getBooksYears() {
     var list = [];
+    var maxYear = 0;
     if (statistics) {
       for (year in statistics) {
         list.push({ name: year, value: statistics[year]["books"] });
+        if (statistics[year]["books"] > maxYear) {
+          maxYear = statistics[year]["books"];
+        }
       }
+      setBiggestYear(maxYear);
     }
     return list;
   }
@@ -213,6 +240,25 @@ export const Profil = () => {
           <SignOutButton onClick={() => logOut()}>Wyloguj</SignOutButton>
         </TextWrapper>
       </Row>
+      <RowColumn>
+        <ConstText>
+          ŚREDNIA LICZBA KSIĄŻEK PRZECZYTANYCH W CIĄGU ROKU: {"  "}
+          <VariableText>{avgBooksPerYear}</VariableText>
+        </ConstText>
+        <ConstText>
+          Ilość stron w największa przeczytanej książce to: {"  "}
+          <VariableText>{biggestBook}</VariableText>
+        </ConstText>
+        <ConstText>
+          Największa przeczytana liczba książek w ciągu roku to: {"  "}
+          <VariableText>{biggestYear}</VariableText>
+        </ConstText>
+        <ConstText>
+          Średnia liczba stron przeczytana w ciągu miesiąca w tym roku to:{" "}
+          {"  "}
+          <VariableText>{avgPagesMonth}</VariableText>
+        </ConstText>
+      </RowColumn>
       <RowSecond>
         <GraphPagesTitle>
           {graphYear == "all"

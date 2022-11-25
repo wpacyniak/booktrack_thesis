@@ -120,6 +120,7 @@ def get_statistics():
     db_books = db["books"].find(
         {"user_id": ObjectId(user_session.user_id), "is_read": True})
     statistics = {}
+    biggest_book = 0
     if db_books is not None:
         for book in db_books:
             if "quote" in book.keys():
@@ -134,6 +135,8 @@ def get_statistics():
                                book["pages"], "",
                                book["rate"], book["read_date"],
                                book["cover"])
+            if int(db_book.pages) > biggest_book:
+                biggest_book = int(db_book.pages)
             if db_book.read_date.year not in statistics.keys():
                 statistics[db_book.read_date.year] = {
                     "pages": db_book.pages, "books": 1, "months": {}}
@@ -147,4 +150,4 @@ def get_statistics():
             else:
                 statistics[db_book.read_date.year]["months"][month]["pages"] += db_book.pages
                 statistics[db_book.read_date.year]["months"][month]["books"] += 1
-    return statistics
+    return statistics, biggest_book

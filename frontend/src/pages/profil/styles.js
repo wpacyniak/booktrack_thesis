@@ -26,6 +26,14 @@ const Row = styled.div`
   gap: 100px;
 `;
 
+const RowColumn = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 30px;
+  gap: 10px;
+`;
+
 const RowSecond = styled.div`
   display: flex;
   width: 100%;
@@ -34,6 +42,18 @@ const RowSecond = styled.div`
 `;
 
 const TextWrapper = styled.div``;
+
+const VariableText = styled.span`
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: bold;
+`;
+const ConstText = styled.p`
+  font-family: "DM Sans";
+  font-style: normal;
+  font-size: 18px;
+  text-transform: uppercase;
+`;
 
 const Email = styled.h3`
   font-family: "DM Sans";
@@ -143,10 +163,13 @@ export {
   ListWrapper,
   FullLogoWrapper,
   TextWrapper,
+  RowColumn,
   RowSecond,
   LogoLabel,
   Login,
   Number,
+  VariableText,
+  ConstText,
   LogoWrapper,
   Logo,
   Row,
