@@ -121,6 +121,7 @@ def get_statistics():
         {"user_id": ObjectId(user_session.user_id), "is_read": True})
     statistics = {}
     biggest_book = 0
+    current_year = datetime.now().year
     if db_books is not None:
         for book in db_books:
             if "quote" in book.keys():
@@ -150,4 +151,7 @@ def get_statistics():
             else:
                 statistics[db_book.read_date.year]["months"][month]["pages"] += db_book.pages
                 statistics[db_book.read_date.year]["months"][month]["books"] += 1
+    if current_year not in statistics.keys():
+        statistics[current_year] = {
+            "pages": 0, "books": 0, "months": {}}
     return statistics, biggest_book

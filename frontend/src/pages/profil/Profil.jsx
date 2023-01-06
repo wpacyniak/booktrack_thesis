@@ -246,7 +246,7 @@ export const Profil = () => {
           <VariableText>{avgBooksPerYear}</VariableText>
         </ConstText>
         <ConstText>
-          Ilość stron w największa przeczytanej książce to: {"  "}
+          Ilość stron w największej przeczytanej książce to: {"  "}
           <VariableText>{biggestBook}</VariableText>
         </ConstText>
         <ConstText>
