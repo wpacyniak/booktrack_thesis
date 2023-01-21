@@ -1,3 +1,4 @@
+from backend.routes import session, books, user, goals
 import os
 
 from flask import Flask
@@ -19,7 +20,3 @@ jwt = JWTManager(app)
 # It's important that all routes are imported here.
 # Don't let your formatter move these imports to the top of the file!
 # Try Ctrl+Shift+P > File: Save without formatting
-from backend.routes import session, books, user, goals
-
-if __name__ != "__main__":
-    app.run(debug=True)
