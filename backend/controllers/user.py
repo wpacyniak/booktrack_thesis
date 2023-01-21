@@ -13,8 +13,8 @@ def add_currently_reading(book_id):
 
 def get_currently_reading_book():
     db_user = db["users"].find_one({"_id": ObjectId(user_session.user_id)})
-    book_id = db_user.get('currently_reading', None)
-    progress = db_user.get('progress', None)
+    book_id = db_user.get('currently_reading', 0)
+    progress = db_user.get('progress', 0)
     book = {}
     if book_id:
         book_db = db["books"].find_one({"_id": ObjectId(book_id)})

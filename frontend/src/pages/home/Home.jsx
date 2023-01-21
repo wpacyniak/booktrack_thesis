@@ -90,9 +90,15 @@ export const Home = () => {
 
     if (res.status === 200) {
       const data = await res.json();
-      setCurrentlyReading(data.book);
-      localStorage.setItem("currently_reading", JSON.stringify(data.book.id));
-      handleSetProgress(data.progress, data.book.pages);
+      if (data.book.id) {
+        setCurrentlyReading(data.book);
+        localStorage.setItem("currently_reading", JSON.stringify(data.book.id));
+        handleSetProgress(data.progress, data.book.pages);
+        return;
+      }
+      setCurrentlyReading();
+      localStorage.setItem("currently_reading", JSON.stringify(0));
+      handleSetProgress(data.progress, 0);
       return;
     }
   }

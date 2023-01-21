@@ -31,7 +31,7 @@ def get_currently_reading():
 def remove_currently_reading():
     try:
         clear_currently_reading_book()
-        return Response(status=400)
+        return Response(status=200)
     except Exception as e:
         return e.args[0], 400
 
