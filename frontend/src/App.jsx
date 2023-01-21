@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
+import { PrivateRoute } from "./components/privateRoute/PrivateRoute";
 import { Welcome } from "./pages/welcome/Welcome";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/register/Register";
@@ -18,11 +19,46 @@ const App = () => {
           <Route path="/" element={<Welcome />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/readBooks" element={<ReadBookList />} />
-          <Route path="/planBooks" element={<PlanBookList />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/profil" element={<Profil />} />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/readBooks"
+            element={
+              <PrivateRoute>
+                <ReadBookList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/planBooks"
+            element={
+              <PrivateRoute>
+                <PlanBookList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/book"
+            element={
+              <PrivateRoute>
+                <Book />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profil"
+            element={
+              <PrivateRoute>
+                <Profil />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </Store>
     </div>
