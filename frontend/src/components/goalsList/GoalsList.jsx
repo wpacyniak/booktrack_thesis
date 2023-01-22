@@ -26,6 +26,7 @@ import { useStore } from "../../Store";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "../../resources/react-circular-progress-bar-styles.css";
 import { colors } from "../../resources/constants";
+import { API_HOST } from "../../config";
 
 export const GoalsList = ({ goals, isChanged, setIsChanged }) => {
   const { state } = useStore();
@@ -62,7 +63,7 @@ export const GoalsList = ({ goals, isChanged, setIsChanged }) => {
         start,
         end,
       };
-      const res = await fetch("http://localhost:5000/add_goal", {
+      const res = await fetch(`${API_HOST}/add_goal`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.auth_token}`,
@@ -82,7 +83,7 @@ export const GoalsList = ({ goals, isChanged, setIsChanged }) => {
 
   async function deleteGoal(id) {
     const body = { id };
-    const res = await fetch("http://localhost:5000/delete_goal", {
+    const res = await fetch(`${API_HOST}/delete_goal`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

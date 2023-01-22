@@ -3,6 +3,7 @@ import { useStore } from "../../Store";
 import { colors } from "../../resources/constants";
 import { CloseButton, Text, Input, Button, ErrorText, Wrapper } from "./styles";
 import { useState } from "react";
+import { API_HOST } from "../../config";
 
 const modalStyles = {
   content: {
@@ -46,7 +47,7 @@ export const ModalPages = ({
       setErrorText("Wartość jest większa niż liczba stron!");
       return;
     } else {
-      const res = await fetch("http://localhost:5000/save_progress", {
+      const res = await fetch(`${API_HOST}/save_progress`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.auth_token}`,

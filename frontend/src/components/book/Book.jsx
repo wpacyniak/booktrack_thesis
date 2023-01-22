@@ -20,6 +20,7 @@ import { useStore } from "../../Store";
 import { FiEdit } from "react-icons/fi";
 import { GiBookmarklet } from "react-icons/gi";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import { API_HOST } from "../../config";
 
 export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
   const { state } = useStore();
@@ -51,7 +52,7 @@ export const Book = ({ book, type, deleteBook, isChanged, setIsChanged }) => {
 
   async function handleCurrentlyReading() {
     const id = book.id;
-    const res = await fetch("http://localhost:5000/add_currently_reading", {
+    const res = await fetch(`${API_HOST}/add_currently_reading`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

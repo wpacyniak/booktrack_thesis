@@ -37,6 +37,7 @@ import {
 import { colors } from "../../resources/constants";
 import { useStore } from "../../Store";
 import { Button } from "../../components/button/Button";
+import { API_HOST } from "../../config";
 
 export const Profil = () => {
   const navigate = useNavigate();
@@ -107,7 +108,7 @@ export const Profil = () => {
   }, [state.yearsList]);
 
   async function getStatictics() {
-    const res = await fetch("http://localhost:5000/get_statistics", {
+    const res = await fetch(`${API_HOST}/get_statistics`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,
@@ -205,7 +206,7 @@ export const Profil = () => {
   }
 
   async function logOut() {
-    const res = await fetch("http://localhost:5000/sign_out", {
+    const res = await fetch(`${API_HOST}/sign_out`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

@@ -4,6 +4,7 @@ import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { useStore } from "../../Store";
+import { API_HOST } from "../../config";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export const Register = () => {
       email,
     };
 
-    const res = await fetch("http://localhost:5000/register", {
+    const res = await fetch(`${API_HOST}/register`, {
       headers: {
         "Content-Type": "application/json",
       },

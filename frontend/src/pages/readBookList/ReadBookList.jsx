@@ -30,6 +30,7 @@ import {
   AiOutlineTable,
 } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { API_HOST } from "../../config";
 
 export const ReadBookList = () => {
   const { state, dispatch } = useStore();
@@ -67,7 +68,7 @@ export const ReadBookList = () => {
     const year = state.year;
     var res = {};
     if (year === "all") {
-      res = await fetch("http://localhost:5000/read_all_books", {
+      res = await fetch(`${API_HOST}/read_all_books`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.auth_token}`,
@@ -76,7 +77,7 @@ export const ReadBookList = () => {
       });
     } else {
       body = { year };
-      res = await fetch("http://localhost:5000/read_books", {
+      res = await fetch(`${API_HOST}/read_books`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.auth_token}`,
@@ -97,7 +98,7 @@ export const ReadBookList = () => {
 
   async function deleteBook(bookId) {
     const body = { bookId: bookId };
-    const res = await fetch("http://localhost:5000/delete_book", {
+    const res = await fetch(`${API_HOST}/delete_book`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

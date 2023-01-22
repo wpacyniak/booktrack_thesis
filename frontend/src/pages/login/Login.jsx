@@ -4,6 +4,7 @@ import { Wrapper, FormWrapper, Input, Button, Text, Title } from "./styles";
 import { Footer } from "../../components/footer/Footer";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { useStore } from "../../Store";
+import { API_HOST } from "../../config";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export const Login = () => {
       password,
     };
 
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch(`${API_HOST}/login`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -38,8 +39,8 @@ export const Login = () => {
       const { user, token } = await res.json();
       dispatch({ type: "SET_USER", payload: user });
       dispatch({ type: "SET_AUTH_TOKEN", payload: token });
-      localStorage.setItem('user',JSON.stringify(user));
-      localStorage.setItem('token',JSON.stringify(token));
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
       navigate("/home");
       return;
     }

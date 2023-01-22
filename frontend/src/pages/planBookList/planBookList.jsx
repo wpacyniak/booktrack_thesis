@@ -7,6 +7,7 @@ import { Book } from "../../components/book/Book";
 import { Form } from "../../components/form/Form";
 import { useStore } from "../../Store";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
+import { API_HOST } from "../../config";
 
 export const PlanBookList = () => {
   const type = "plan";
@@ -30,7 +31,7 @@ export const PlanBookList = () => {
   }, [isOpen, isChanged, state.auth_token]);
 
   const getBookPlans = async () => {
-    const res = await fetch("http://localhost:5000/book_plans", {
+    const res = await fetch(`${API_HOST}/book_plans`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,
@@ -55,7 +56,7 @@ export const PlanBookList = () => {
 
   async function deleteBook(bookId) {
     const body = { bookId: bookId };
-    const res = await fetch("http://localhost:5000/delete_book", {
+    const res = await fetch(`${API_HOST}/delete_book`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

@@ -17,6 +17,7 @@ import { Input } from "../input/Input";
 import { StarPicker } from "../starPicker/StarPicker";
 import { useState, useEffect } from "react";
 import { useStore } from "../../Store";
+import { API_HOST } from "../../config";
 
 const modalStyles = {
   content: {
@@ -181,7 +182,7 @@ export const Form = ({ isOpen, setIsOpen, type, book }) => {
       };
     }
 
-    const res = await fetch("http://localhost:5000/add_book", {
+    const res = await fetch(`${API_HOST}/add_book`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,

@@ -22,6 +22,7 @@ import { Header } from "../../components/header/Header";
 import { ModalPages } from "../../components/modalPages/ModalPages";
 import { GoalsList } from "../../components/goalsList/GoalsList";
 import { Form } from "../../components/form/Form";
+import { API_HOST } from "../../config";
 
 export const Home = () => {
   const [bookProgress, setBookProgress] = useState(0);
@@ -51,7 +52,7 @@ export const Home = () => {
   }, [state.user, state.token, isChanged]);
 
   async function getYearsList() {
-    const res = await fetch("http://localhost:5000/get_years", {
+    const res = await fetch(`${API_HOST}/get_years`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,
@@ -80,7 +81,7 @@ export const Home = () => {
   }
 
   async function getCurrentlyReading() {
-    const res = await fetch("http://localhost:5000/get_currently_reading", {
+    const res = await fetch(`${API_HOST}/get_currently_reading`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,
@@ -104,7 +105,7 @@ export const Home = () => {
   }
 
   async function getGoals() {
-    const res = await fetch("http://localhost:5000/get_goals", {
+    const res = await fetch(`${API_HOST}/get_goals`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${state.auth_token}`,
@@ -126,7 +127,7 @@ export const Home = () => {
   async function handleSetIsReadModalOpen(value) {
     setIsReadModalOpen(value);
     if (value === false) {
-      const res = await fetch("http://localhost:5000/clear_currently_reading", {
+      const res = await fetch(`${API_HOST}/clear_currently_reading`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${state.auth_token}`,
