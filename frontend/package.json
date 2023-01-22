@@ -6,7 +6,6 @@
     "dev": "parcel src/index.html"
   },
   "dependencies": {
-    "postcss-scss": "^4.0.6",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
