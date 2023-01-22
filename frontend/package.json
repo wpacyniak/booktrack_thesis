@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm install && parcel src/index.html"
+    "dev": "parcel src/index.html"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -13,7 +13,7 @@
     "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
     "recharts": "^2.1.16",
-    "styled-components": "^5.3.5"
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
     "eslint": "^8.23.0",
