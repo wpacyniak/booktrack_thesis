@@ -1,10 +1,10 @@
-import { Label, Input } from "./styles";
+import { Label, StyledInput } from "./styles";
 
 export const Input = ({ label, onChange, type, value }) => {
   return (
     <div>
       <Label htmlFor={label}>{label}</Label>
-      <Input
+      <StyledInput
         type={type}
         name={label}
         id={label}

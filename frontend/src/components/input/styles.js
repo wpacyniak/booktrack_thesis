@@ -12,7 +12,7 @@ const Label = styled.h4`
   text-transform: uppercase;
 `;
 
-const Input = styled.input`
+const StyledInput = styled.input`
   width: 200px;
   height: 40px;
   border: none;
@@ -29,4 +29,4 @@ const Input = styled.input`
   }
 `;
 
-export { Input, Label };
+export { StyledInput, Label };
