@@ -6,6 +6,7 @@
     "dev": "parcel src/index.html"
   },
   "dependencies": {
+    "postcss-scss": "^4.0.6",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
@@ -18,7 +19,7 @@
   "devDependencies": {
     "eslint": "^8.23.0",
     "eslint-config-prettier": "^8.5.0",
-    "parcel": "^2.7.0",
+    "parcel": "^2.8.3",
     "prettier": "^2.7.1",
     "process": "^0.11.10"
   }
