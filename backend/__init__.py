@@ -21,4 +21,5 @@ jwt = JWTManager(app)
 # Try Ctrl+Shift+P > File: Save without formatting
 from backend.routes import session, books, user, goals
 
-
+if __name__ != "__main__":
+    app.run(debug=True)

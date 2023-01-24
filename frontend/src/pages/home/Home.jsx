@@ -165,7 +165,7 @@ export const Home = () => {
               alt="cover"
             />
             <InfoWrapper>
-              <Title>{currentlyReading.name}</Title>
+              <Title>{currentlyReading.title}</Title>
               <Author>{currentlyReading.author}</Author>
               <Pages>
                 {progress} / {currentlyReading.pages} stron

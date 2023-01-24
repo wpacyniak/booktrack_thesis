@@ -1,10 +1,11 @@
-# booktrack_thesis
+<h1>Booktrack Backend</h1>
 
-to activate venv
+## Installation
 
- venv\Scripts\activate
+Make sure you are located in the root directory of the project and run command `pip install virtualenv` to install library providing virtual environment. Then create this vritual environment by running command `virtualenv venv`. Finally to activate the virtual enivronment run command `venv\Scripts\activate`. To install all the requirements in the current environment run commmand  `pip install -r requirements.txt`.
 
- pip install virtualenv (if you don't already have virtualenv installed)
-virtualenv venv to create your new environment (called 'venv' here)
-source venv/bin/activate to enter the virtual environment
-pip install -r requirements.txt to install the requirements in the current environment
+---
+
+## Start
+
+To run application run command `python app.py`
